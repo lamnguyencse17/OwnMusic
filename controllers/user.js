@@ -1,6 +1,7 @@
 import { OK_RESPONSE, HANDLED_ERROR_RESPONSE } from "../constants/http";
 import { createUser, getUserByEmail } from "../services/user"
-import { hashPassword } from "../utils/password";
+import { hashPassword, comparePassword } from "../utils/password";
+import createToken from "../utils/token";
 import { validateCreateUser } from "../validators/userValidator";
 
 export const registerController = async (req, res) => {
@@ -26,4 +27,29 @@ export const registerController = async (req, res) => {
       .json({ message: "Something went wrong" });
   }
   return res.status(OK_RESPONSE).json(result);
+};
+
+export const logInController = async (req, res) => {
+  let email = req.body.email;
+  let password = req.body.password;
+  let user = await getUserByEmail(email);
+  if (!user.status) {
+    return res.status(HANDLED_ERROR_RESPONSE).json({ message: user.message });
+  }
+  user = user.result;
+  let result = await comparePassword(password, user.password);
+  if (!result.status) {
+    return res.status(HANDLED_ERROR_RESPONSE).json({ message: result.message });
+  }
+  const {_id} = result;
+  const token = createToken({_id, email});
+  return res
+    .status(OK_RESPONSE)
+    .cookie("token", token, {
+      maxAge: 3600000,
+      httpOnly: true,
+    })
+    .json({
+      token
+    });
 };

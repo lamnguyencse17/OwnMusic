@@ -26,4 +26,5 @@ import passport from "passport";
 // router.use("/invite", authenticator, require("./routes/invite"));
 
 router.use("/auth/register", require("./routes/auth/register"));
+router.use("/auth/login", require("./routes/auth/login"));
 module.exports = router;

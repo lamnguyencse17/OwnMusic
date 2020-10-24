@@ -2,7 +2,7 @@ import userModel from "../models/users";
 import mongoose from "mongoose";
 
 export const createUser = async ({email, password, name}) => {
-    let result = await userModel.create({
+    const result = await userModel.create({
         name,
         email,
         password
@@ -10,7 +10,7 @@ export const createUser = async ({email, password, name}) => {
     return { result, status: true };
 };
 export const getUserById = async (_id) => {
-    let result = await userModel.findOne({_id: mongoose.Types.ObjectId(_id)})
+    const result = await userModel.findOne({_id: mongoose.Types.ObjectId(_id)})
     let status = true;
     if (!result){
         status = false
@@ -19,10 +19,12 @@ export const getUserById = async (_id) => {
 }
 
 export const getUserByEmail = async (email) => {
-    let result = await userModel.findOne({email})
+    const result = await userModel.findOne({email})
     let status = true;
+    let message;
     if (!result){
         status = false
+        message = "User is not found"
     }
-    return { result, status};
+    return { result, status, message};
 }

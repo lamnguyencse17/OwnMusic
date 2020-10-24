@@ -1,7 +1,7 @@
 # Update the VARIANT arg in docker-compose.yml to pick a Node version: 10, 12, 14
-ARG VARIANT=12
+ARG VARIANT=14
 FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:${VARIANT}
-
+ENV SECRET_KEY=TU%8&sPS5Qz4$rLc#VsQfFvnz3W7nV
 # Install MongoDB command line tools
 ARG MONGO_TOOLS_VERSION=4.2
 RUN curl -sSL "https://www.mongodb.org/static/pgp/server-${MONGO_TOOLS_VERSION}.asc" | (OUT=$(apt-key add - 2>&1) || echo $OUT) \
