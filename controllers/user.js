@@ -1,5 +1,5 @@
 import { OK_RESPONSE, HANDLED_ERROR_RESPONSE } from "../constants/http";
-import { createUser, getUserByEmail } from "../services/user";
+import { createUser, getUserByEmail, getUserById } from "../services/user";
 import { hashPassword, comparePassword } from "../utils/password";
 import createToken from "../utils/token";
 import { validateCreateUser, validateLogInUser } from "../validators/userValidator";
@@ -46,8 +46,7 @@ export const logInController = async (req, res) => {
   if (!result.status) {
     return res.status(HANDLED_ERROR_RESPONSE).json({ message: result.message });
   }
-  const {_id} = result;
-  const token = createToken({_id, email});
+  const token = createToken({_id: user._id, email});
   return res
     .status(OK_RESPONSE)
     .cookie("token", token, {
@@ -57,4 +56,18 @@ export const logInController = async (req, res) => {
     .json({
       token
     });
+};
+
+export const getUserController = async (req, res) => {
+  const _id = req._id;
+  let { result, status } = await getUserById(_id);
+  if (!status) {
+    return res
+      .status(HANDLED_ERROR_RESPONSE)
+      .json({ message: "Something went wrong" });
+  }
+  result = result.toObject();
+  let user = {...result};
+  delete user.password;
+  return res.status(OK_RESPONSE).json(user);
 };
