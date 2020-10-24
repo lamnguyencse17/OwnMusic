@@ -1,33 +1,33 @@
-import { isValidEmail, isValidPassword, isValidName } from "./utils"
+import { isValidEmail, isValidPassword, isValidName } from "./utils";
 
 export const validateCreateUser = ({email, password, name}) => {
     let status = true;
-    let message = []
+    let message = [];
     if (!isValidName(name)) {
-        status = false
-        message.push("Invalid name")
+        status = false;
+        message.push("Invalid name");
     }
     if (!isValidEmail(email)) {
-        status = false
-        message.push("Invalid email")
+        status = false;
+        message.push("Invalid email");
     }
     if (!isValidPassword(password)) {
-        status = false
-        message.push("Invalid password")
+        status = false;
+        message.push("Invalid password");
     }
-    return {status, message}
-}
+    return {status, message};
+};
 
 export const validateLogInUser = ({email, password}) => {
     let status = true;
-    let message = []
+    let message = [];
     if (!isValidEmail(email)) {
-        status = false
-        message.push("Invalid email")
+        status = false;
+        message.push("Invalid email");
     }
     if (!isValidPassword(password)) {
-        status = false
-        message.push("Invalid password")
+        status = false;
+        message.push("Invalid password");
     }
-    return {status, message}
-}
+    return {status, message};
+};

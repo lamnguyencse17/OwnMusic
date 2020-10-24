@@ -1,5 +1,5 @@
 import { OK_RESPONSE, HANDLED_ERROR_RESPONSE } from "../constants/http";
-import { createUser, getUserByEmail } from "../services/user"
+import { createUser, getUserByEmail } from "../services/user";
 import { hashPassword, comparePassword } from "../utils/password";
 import createToken from "../utils/token";
 import { validateCreateUser, validateLogInUser } from "../validators/userValidator";
@@ -30,7 +30,7 @@ export const registerController = async (req, res) => {
 };
 
 export const logInController = async (req, res) => {
-  const {email, password} = req.body
+  const {email, password} = req.body;
   const validateResult = validateLogInUser({email, password});
   if (!validateResult.status) {
     return res

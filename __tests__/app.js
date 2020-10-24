@@ -6,6 +6,6 @@ describe('Test the functionalities of API', () => {
         request(app).get("/").then(response => {
             expect(response.statusCode).toBe(200);
             done();
-        })
-    })
-})
+        });
+    });
+});

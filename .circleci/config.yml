@@ -1,19 +1,35 @@
 
-version: 1
+version: 2.1
 jobs:
-  nodejs:
+  build:
     docker:
       - image: 'circleci/node:latest'
-      - image: 'circleci/mongo:latest'
-  steps:
-    - checkout
-    - run:
-      command: |
-        SECRET_KEY=TU%8&sPS5Qz4$rLc#VsQfFvnz3W7nV
-        MONGODB_URI=mongodb://db:27017/ownmusic?readPreference=primary&appname=Server&ssl=false
-        EXPRESS_PORT=3000
-        npm install
+      - image: 'mongo:latest'
+    steps:
+      - checkout
+      - run:
+          name: "Setup SECRET_KEY"
+          command: echo 'export SECRET_KEY="TU%8&sPS5Qz4$rLc#VsQfFvnz3W7nV"' >> $BASH_ENV
+      - run:
+          name: "Setup MONGODB_URI"
+          command: echo 'export MONGODB_URI="mongodb://127.0.0.1:27017/ownmusic?readPreference=primary&appname=Server&ssl=false"' >> $BASH_ENV
+      - run:
+          name: "Setup EXPRESS_PORT"
+          command: echo 'export EXPRESS_PORT="3000"' >> $BASH_ENV
+      - run:
+          name: "Install node_modules"
+          command: npm install
+      - run:
+          name: Testing Lint
+          command: npm run eslint
+      - run:
+          name: Running Test
+          command: npm run test -- --coverage
+      - store_artifacts:
+            path: coverage
+            destination: coverage
 workflows:
-    test:
-      jobs:
-        - nodejs
+  version: 2
+  build_and_test:
+    jobs:
+      - build

@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import app from "./app"
+import app from "./app";
 
 mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
@@ -10,5 +10,5 @@ mongoose.connect(process.env.MONGODB_URI, {
 
 
 app.listen(parseInt(process.env.EXPRESS_PORT), () => {
-    console.log("Running on 3000 port")
-})
+    console.log("Running on 3000 port");
+});

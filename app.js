@@ -7,14 +7,14 @@ import cookieParser from "cookie-parser";
 const app = express();
 
 app.use(morgan("tiny"));
-app.use(cookieParser())
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: false}))
-app.use(compression())
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(compression());
 
-app.use("/api", require("./routes"))
+app.use("/api", require("./routes"));
 app.use("/", (req, res) => {
     return res.send("OK");
-})
+});
 
 export default app;
