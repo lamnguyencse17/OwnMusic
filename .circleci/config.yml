@@ -24,12 +24,10 @@ jobs:
           command: npm run eslint
       - run:
           name: Running Test
-          command: npm run test -- --coverage --ci --reporters=default --json --outputFile="testResult.json"
+          command: npm run test -- --coverage --ci
       - store_artifacts:
           path: coverage
           destination: coverage
-      - store_test_results:
-          path: testResult.json
 
 workflows:
   version: 2
