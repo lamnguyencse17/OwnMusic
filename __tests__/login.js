@@ -47,7 +47,6 @@ describe('Test Login API functionalities', () => {
                 expect(cookies.token).toEqual(expect.objectContaining({
                     name: "token",
                     value: expect.any(String),
-                    maxAge: 3600,
                     httpOnly: true
                 }));
                 done();

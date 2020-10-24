@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import passport from "passport";
 import app from "./app";
 
 mongoose.connect(process.env.MONGODB_URI, {
@@ -7,6 +8,8 @@ mongoose.connect(process.env.MONGODB_URI, {
     useFindAndModify: false,
     useCreateIndex: true,
 });
+
+require("./utils/passport")(passport);
 
 
 app.listen(parseInt(process.env.EXPRESS_PORT), () => {

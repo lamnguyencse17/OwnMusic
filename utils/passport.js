@@ -1,4 +1,4 @@
-const { getUserById } = require("../services/userService");
+const { getUserById } = require("../services/user");
 
 const JwtStrategy = require("passport-jwt").Strategy;
 const opts = {};
