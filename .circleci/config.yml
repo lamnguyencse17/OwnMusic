@@ -1,0 +1,19 @@
+
+version: 1
+jobs:
+  nodejs:
+    docker:
+      - image: 'circleci/node:latest'
+      - image: 'circleci/mongo:latest'
+  steps:
+    - checkout
+    - run:
+      command: |
+        SECRET_KEY=TU%8&sPS5Qz4$rLc#VsQfFvnz3W7nV
+        MONGODB_URI=mongodb://db:27017/ownmusic?readPreference=primary&appname=Server&ssl=false
+        EXPRESS_PORT=3000
+        npm install
+workflows:
+    test:
+      jobs:
+        - nodejs
