@@ -17,12 +17,12 @@ describe('Test Login API functionalities', () => {
         await userModel.create({
             "name": "Test User",
             "password": await hashPassword("123456"),
-            "email": "testUser@gmail.com",
+            "email": "testUser0@gmail.com",
         });
     });
 
     afterAll(async (done) => {
-        await userModel.deleteOne({email: "testUser@gmail.com"}, (err) => {
+        await userModel.deleteOne({email: "testUser0@gmail.com"}, (err) => {
             if(err){
                 console.log(err);
             }
@@ -32,7 +32,7 @@ describe('Test Login API functionalities', () => {
     test("Success Login", done => {
         request(app).post("/api/auth/login").send({
             "password": "123456",
-            "email": "testUser@gmail.com"
+            "email": "testUser0@gmail.com"
         })
             .set("Content-Type", "application/json")
             .set("Accept", "application/json")
@@ -71,7 +71,7 @@ describe('Test Login API functionalities', () => {
     test("Wrong Password", done => {
         request(app).post("/api/auth/login").send({
             "password": "1234567",
-            "email": "testUser@gmail.com"
+            "email": "testUser0@gmail.com"
         })
             .set("Content-Type", "application/json")
             .set("Accept", "application/json")
