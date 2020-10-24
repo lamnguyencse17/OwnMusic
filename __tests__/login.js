@@ -71,7 +71,7 @@ describe('Test Login API functionalities', () => {
     test("Wrong Password", done => {
         request(app).post("/api/auth/login").send({
             "password": "1234567",
-            "email": "lamnguyen@gmail.com"
+            "email": "testUser@gmail.com"
         })
             .set("Content-Type", "application/json")
             .set("Accept", "application/json")
@@ -101,7 +101,7 @@ describe('Test Login API functionalities', () => {
     test("Missing Password", done => {
         const expecting = ["Invalid password"];
         request(app).post("/api/auth/login").send({
-            "email": "testuser@gmail.com"
+            "email": "testUser@gmail.com"
         })
             .set("Content-Type", "application/json")
             .set("Accept", "application/json")
