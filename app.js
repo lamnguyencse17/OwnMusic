@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(compression());
 
-app.use("/api", require("./routes"));
+app.use("/api", require("./src/backend/routes"));
 app.use("/", (req, res) => {
     return res.send("OK");
 });
