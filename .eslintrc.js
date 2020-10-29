@@ -7,7 +7,7 @@ module.exports = {
     node: true,
     "jest/globals": true
   },
-  extends: ["eslint:recommended"],
+  extends: ["eslint:recommended", "plugin:react/recommended"],
   parserOptions: {
     ecmaFeatures: {
       experimentalObjectRestSpread: true,
@@ -15,8 +15,11 @@ module.exports = {
     },
     sourceType: "module",
   },
-  plugins: ["import", "jest"],
+  plugins: ["import", "jest", "react"],
   rules: {
+    "react/prop-types": [0],
+    "react/display-name": ["off"],
+    "react/no-unescaped-entities": ["off"],
     "linebreak-style": ["error", "unix"],
     semi: ["error", "always"],
     "no-console": [
