@@ -36,7 +36,8 @@
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "validator": "^13.1.17"
+    "validator": "^13.1.17",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.1",
@@ -57,7 +58,6 @@
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^4.5.0",
     "jest": "^26.6.1",
-    "morgan": "^1.10.0",
     "nodemon": "^2.0.6",
     "prettier": "^2.1.2",
     "react-test-render": "^1.1.2",
