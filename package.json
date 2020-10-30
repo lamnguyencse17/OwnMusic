@@ -4,7 +4,7 @@
   "description": "ownmusic is a new platform that is built to support new artists",
   "main": "index.js",
   "scripts": {
-    "eslint": "eslint .",
+    "eslint": "eslint ./src",
     "test": "jest",
     "start": "pm2-runtime start ecosystem.config.js --env production",
     "build": "npm run build-fe && npm run build-be",
