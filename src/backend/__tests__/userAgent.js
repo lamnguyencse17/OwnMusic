@@ -1,5 +1,5 @@
 import request from "supertest";
-import app from "../../../app";
+import app from "../app";
 import mongoose from "mongoose";
 import userModel from "../models/users";
 import { hashPassword } from "../utils/password";

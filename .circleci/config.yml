@@ -14,6 +14,12 @@ jobs:
           name: "Setup MONGODB_URI"
           command: echo 'export MONGODB_URI="mongodb://127.0.0.1:27017/ownmusic?readPreference=primary&appname=Server&ssl=false"' >> $BASH_ENV
       - run:
+          name: "Setup BACKEND_SERVER"
+          command: echo 'export BACKEND_SERVER="http://localhost:3000"' >> $BASH_ENV
+      - run:
+          name: "Setup FRONTEND_SERVER"
+          command: echo 'export FRONTEND_SERVER="http://localhost:8080"' >> $BASH_ENV
+      - run:
           name: "Setup EXPRESS_PORT"
           command: echo 'export EXPRESS_PORT="3000"' >> $BASH_ENV
       - run:

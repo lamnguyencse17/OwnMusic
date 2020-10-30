@@ -4,6 +4,8 @@ FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:${VARIANT}
 ENV SECRET_KEY=TU%8&sPS5Qz4$rLc#VsQfFvnz3W7nV
 ENV MONGODB_URI=mongodb://db:27017/ownmusic?readPreference=primary&appname=Server&ssl=false
 ENV EXPRESS_PORT=3000
+ENV BACKEND_SERVER=http://localhost:3000
+ENV FRONTEND_SERVER=http://localhost:8080
 # Install MongoDB command line tools
 ARG MONGO_TOOLS_VERSION=4.2
 RUN curl -sSL "https://www.mongodb.org/static/pgp/server-${MONGO_TOOLS_VERSION}.asc" | (OUT=$(apt-key add - 2>&1) || echo $OUT) \
