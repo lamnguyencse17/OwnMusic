@@ -12,6 +12,6 @@ mongoose.connect(process.env.MONGODB_URI, {
 require("./utils/passport")(passport);
 
 
-app.listen(parseInt(process.env.EXPRESS_PORT), () => {
+app.listen(parseInt(process.env.PORT), () => {
     console.log("Running on 3000 port");
 });
