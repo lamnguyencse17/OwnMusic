@@ -21,8 +21,8 @@ jobs:
           command: echo 'export FRONTEND_SERVER="http://localhost:8080"' >> $BASH_ENV
       - run:
           name: "Setup EXPRESS_PORT"
-          command: echo 'export EXPRESS_PORT="3000"' >> $BASH_ENV
-      - run:
+          command: echo 'export PORT="3000"' >> $BASH_ENV
+      - run:    
           name: "Install node_modules"
           command: npm install
       - run:
