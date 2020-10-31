@@ -10,9 +10,11 @@
     "build": "npm run build-fe && npm run build-be",
     "be": "nodemon --exec babel-node ./src/backend/server.js --watch . --ignore 'node_modules'",
     "fe": "webpack serve --mode development --env development",
-    "build-fe": "NODE_ENV=production npm run watch:css && webpack --config webpack-prod.config.js",
+    "build-fe": "NODE_ENV=production webpack --config webpack-prod.config.js",
     "build-be": "babel ./src/backend -D --out-dir dist",
-    "watch:css": "postcss src/frontend/assets/tailwind.css -o src/frontend/assets/main.css"
+    "build:css": "postcss src/frontend/assets/tailwind.css -o src/frontend/assets/main.css",
+    "watch:css": "postcss -w src/frontend/assets/tailwind.css -o src/frontend/assets/main.css",
+    "prebuild": "NODE_ENV=production npm run build:css"
   },
   "author": "",
   "license": "ISC",
