@@ -7,6 +7,10 @@ import { bindActionCreators } from "redux";
 // import { setUser, clearUser } from "../actions/user";
 import axios from "axios";
 import Landing from "./Landing";
+import Login from "./Login";
+import Navbar from "./common/Navbar";
+import Footer from "./common/Footer";
+import Register from "./Register";
 
 class App extends Component {
   constructor(props) {
@@ -20,31 +24,38 @@ class App extends Component {
       }
     });
   }
-//   async componentDidMount() {
-//     const { setUser, history, token, location } = this.props;
-//     let isLogin = await setUser();
-//     if (!isLogin) {
-//       history.push("/");
-//     } else {
-//       if (
-//         // token &&
-//         // token != "" &&
-//         ["/login", "/signup", "/"].includes(location.pathname)
-//       ) {
-//         history.push("/main");
-//       }
-//     }
-//   }
+  //   async componentDidMount() {
+  //     const { setUser, history, token, location } = this.props;
+  //     let isLogin = await setUser();
+  //     if (!isLogin) {
+  //       history.push("/");
+  //     } else {
+  //       if (
+  //         // token &&
+  //         // token != "" &&
+  //         ["/login", "/signup", "/"].includes(location.pathname)
+  //       ) {
+  //         history.push("/main");
+  //       }
+  //     }
+  //   }
 
   render() {
     // const { token } = this.props;
     return (
       <>
+        <Navbar />
         <Suspense fallback={<div className="loader"></div>}>
           <Switch>
-          <Route
-              path="/"
-              render={() => <Landing {...this.props} />}
+            <Route path="/" render={() => <Landing {...this.props} />} exact />
+            <Route
+              path="/login"
+              render={() => <Login {...this.props} />}
+              exact
+            />
+            <Route
+              path="/register"
+              render={() => <Register {...this.props} />}
               exact
             />
             {/* <Route path="/main" render={() => <Main {...this.props} />} exact />
@@ -57,6 +68,7 @@ class App extends Component {
             <Route path="*" component={PageNotFound} />
           </Switch>
         </Suspense>
+        <Footer />
       </>
     );
   }
