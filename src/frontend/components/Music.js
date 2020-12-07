@@ -1,24 +1,30 @@
 import React from "react";
-import Cover from "./Artist/Cover";
-import ArtistInfo from "./Artist/Info";
-import MusicList from "./Artist/MusicList";
+import Cover from "./Music/Cover";
 import Suggestions from "./Landing/Suggestions";
+import MusicInfo from "./Music/MusicInfo";
+import DemoPlayer from "./Music/Demo";
+import CallToAction from "./Music/CallToAction";
 
-export default function Artist() {
+function Music(props) {
   return (
     <div style={{ backgroundColor: "#494949" }}>
       <div className="container mx-auto">
+        <div className="mb-10">
           <Cover/>
           <div className="grid grid-cols-4">
             <div className="col-span-3">
-              <MusicList/>
+              <DemoPlayer/>
             </div>
             <div className="col-span-1">
-              <ArtistInfo/>
+              <MusicInfo/>
             </div>
           </div>
+          <CallToAction/>
+        </div>
         <Suggestions/>
       </div>
     </div>
   );
 }
+
+export default Music;
