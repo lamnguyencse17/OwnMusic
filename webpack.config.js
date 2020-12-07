@@ -1,4 +1,12 @@
 const path = require("path");
+const dotenv = require("dotenv");
+const webpack = require("webpack");
+
+const env = dotenv.config().parsed;
+const envKeys = Object.keys(env).reduce((prev, next) => {
+  prev[`process.env.${next}`] = JSON.stringify(env[next]);
+  return prev;
+}, {});
 
 module.exports = {
   entry: "./src/frontend/components/Index.js",
@@ -13,11 +21,11 @@ module.exports = {
     publicPath: "/dist/",
     historyApiFallback: true,
     hot: true,
-    host: '0.0.0.0', // to accept connections from outside container
+    host: "0.0.0.0", // to accept connections from outside container
     watchOptions: {
       aggregateTimeout: 500, // delay before reloading
-      poll: 1000 // enable polling since fsevents are not supported in docker
-    }
+      poll: 1000, // enable polling since fsevents are not supported in docker
+    },
   },
   module: {
     rules: [
@@ -49,4 +57,5 @@ module.exports = {
   resolve: {
     extensions: [".js", ".jsx", ".json", ".wasm", ".mjs", "*"],
   },
+  plugins: [new webpack.DefinePlugin(envKeys)],
 };

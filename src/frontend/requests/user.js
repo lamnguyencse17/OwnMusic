@@ -6,6 +6,7 @@ export const createLoginRequest = async ({ email, password }) => {
 		const res = await axios.post(requestUrl, { email, password });
 		return { status: true, token: res.data };
 	} catch (err) {
+		console.error(err.response.message);
 		return {
 			status: false,
 			errCode: err.response.status,
@@ -35,6 +36,7 @@ export const createRegisterRequest = async ({ name, email, password }) => {
 		await axios.post(requestUrl, { name, email, password });
 		return { status: true };
 	} catch (err) {
+		console.error(err.response.message);
 		return {
 			status: false,
 			errCode: err.response.status,

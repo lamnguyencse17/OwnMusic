@@ -139,7 +139,7 @@ export default function Login() {
                     placeholder="Retype Your Password"
                     disabled={isSubmitting}
                     onChange={handleChange}
-                    value={values.password}
+                    value={values.password2}
                   />
                   {errors.password2 && touched.password2 && errors.password2}
                 </div>
