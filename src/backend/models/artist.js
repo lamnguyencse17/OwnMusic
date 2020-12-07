@@ -6,8 +6,8 @@ export const artistSchema = new Artists({
   name: { type: String, required: true },
   email: { type: String, required: true},
   password: { type: String, required: true },
-  cover: {type: String, require: true},
-  musics: [{type: mongoose.Schema.ObjectID, ref: "Musics"}]
+  coverURL: {type: String, require: true},
+  musics: [{type: mongoose.Schema.Types.ObjectId, ref: "Musics"}]
 });
 
 const artistModel = mongoose.model("Artists", artistSchema);

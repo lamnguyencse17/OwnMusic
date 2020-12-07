@@ -3,9 +3,9 @@ import mongoose from "mongoose";
 const Purchases = mongoose.Schema;
 
 export const purchaseSchema = new Purchases({
-  user: {type: mongoose.Schema.ObjectID, required: true},
-  artist: {type: mongoose.Schema.ObjectID, required: true},
-  musics: {type: mongoose.Schema.ObjectID}
+  user: {type: mongoose.Schema.Types.ObjectId, required: true},
+  artist: {type: mongoose.Schema.Types.ObjectId, required: true},
+  musics: {type: mongoose.Schema.Types.ObjectId}
 });
 
 const purchaseModel = mongoose.model("Purchases", purchaseSchema);
