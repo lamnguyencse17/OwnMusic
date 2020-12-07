@@ -9,19 +9,19 @@ function Music(props) {
   return (
     <div style={{ backgroundColor: "#494949" }}>
       <div className="container mx-auto">
-        <div className="mb-10">
+        <div className="py-10">
           <Cover/>
-          <div className="grid grid-cols-4">
+          <div className="grid grid-cols-4 py-5">
             <div className="col-span-3">
               <DemoPlayer/>
             </div>
             <div className="col-span-1">
               <MusicInfo/>
+              <CallToAction/>
             </div>
           </div>
-          <CallToAction/>
+          <Suggestions/>
         </div>
-        <Suggestions/>
       </div>
     </div>
   );

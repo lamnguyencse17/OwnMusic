@@ -3,7 +3,8 @@ import React from "react";
 function MusicInfo(props) {
   return (
     <div>
-      Music Info Goes Here
+      <h1>Music Title</h1>
+      <h2>Description</h2>
     </div>
   );
 }

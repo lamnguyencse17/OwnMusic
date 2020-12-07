@@ -1,9 +1,10 @@
 import React from "react";
+import ReactPlayer from "react-player/lazy";
 
 function DemoPlayer(props) {
   return (
     <div>
-      A music player goes here that plays demo
+      <ReactPlayer url="https://www.youtube.com/watch?v=WUcXQ--yGWQ"/>
     </div>
   );
 }
