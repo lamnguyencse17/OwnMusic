@@ -7,7 +7,7 @@ import Suggestions from "./Landing/Suggestions";
 export default function Artist() {
   return (
     <div style={{ backgroundColor: "#494949" }}>
-      <div className="container mx-auto">
+      <div className="container mx-auto py-10">
           <Cover/>
           <div className="grid grid-cols-4">
             <div className="col-span-3">

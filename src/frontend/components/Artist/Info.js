@@ -3,7 +3,8 @@ import React from "react";
 function ArtistInfo(props) {
   return (
     <div>
-      Artist Info Goes Here
+      <h1>Artist Name</h1>
+      <h2>Some Description</h2>
     </div>
   );
 }
