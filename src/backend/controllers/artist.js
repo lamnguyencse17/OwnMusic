@@ -87,11 +87,11 @@ export const getArtistAsUserController = async (req, res) => {
 };
 
 export const getArtistSuggestionsController = async (req, res) => {
-  const { music, message, status } = await getArtistSuggestions();
+  const { artist, message, status } = await getArtistSuggestions();
   if (!status) {
     return res.status(HANDLED_ERROR_RESPONSE).json({ message });
   }
-  return res.status(OK_RESPONSE).json(music);
+  return res.status(OK_RESPONSE).json(artist);
 };
 
 export const getArtistByPageController = async (req, res) => {

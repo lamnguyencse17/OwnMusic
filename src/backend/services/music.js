@@ -62,7 +62,24 @@ export const getMusicByPage = async ({ limit, offset }) => {
 
 export const getMusicSuggestions = async () => {
   try {
-    const result = await musicModel.aggregate([{ $sample: { size: 5 } }]);
+    const result = await musicModel.aggregate([
+      { $sample: { size: 5 } },
+      {
+        $lookup: {
+          from: "artists",
+          localField: "artist",
+          foreignField: "_id",
+          as: "artist",
+        },
+      },
+      {
+        $unwind: {
+          path: "$artist",
+          preserveNullAndEmptyArrays: false,
+        },
+      },
+      { $project: { downloadURL: 0, "artist.password": 0, "artist.email": 0 } },
+    ]);
     console.log(result);
     return { status: true, music: result };
   } catch (err) {

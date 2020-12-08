@@ -43,7 +43,7 @@ export const getArtistByIdAsUser = async (_id) => {
   try {
     const result = await artistModel
       .findOne({ _id: mongoose.Types.ObjectId(_id) })
-      .populate("musics", "-downloadURL")
+      .populate("musics", "-downloadURL -artist")
       .lean();
     if (!result) {
       return { status: false, message: "No Artist With Such ID" };
@@ -83,8 +83,10 @@ export const addMusicToArtist = async (artistId, songId) => {
 
 export const getArtistSuggestions = async () => {
   try {
-    const result = await artistModel.aggregate([{ $sample: { size: 5 } }]);
-    console.log(result);
+    const result = await artistModel.aggregate([
+      { $sample: { size: 5 } },
+      { $project: { password: 0, email: 0, musics: 0 } },
+    ]);
     return { status: true, artist: result };
   } catch (err) {
     console.error(err);
@@ -94,7 +96,12 @@ export const getArtistSuggestions = async () => {
 
 export const getArtistByPage = async ({ limit, offset }) => {
   try {
-    const result = await musicModel.find({}).skip(offset).limit(limit).lean();
+    const result = await artistModel
+      .find({})
+      .skip(offset)
+      .limit(limit)
+      .select("-password -musics -email")
+      .lean();
     return { status: true, artist: result };
   } catch (err) {
     console.error(err);
