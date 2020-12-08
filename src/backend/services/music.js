@@ -1,4 +1,5 @@
 import musicModel from "../models/musics";
+import artistModel from "../models/artist";
 import mongoose from "mongoose";
 
 export const createMusic = async ({
@@ -27,15 +28,20 @@ export const createMusic = async ({
 };
 
 export const getSingleMusic = async (musicId) => {
-  const result = await musicModel
-    .findOne({ _id: mongoose.Types.ObjectId(musicId) })
-    .select("-downloadURL")
-    .populate("artist", "name _id")
-    .lean();
-  if (!result) {
-    return { status: false, message: "No Music With Such ID Found" };
+  try {
+    const result = await musicModel
+      .findOne({ _id: mongoose.Types.ObjectId(musicId) })
+      .select("-downloadURL")
+      .populate("artist", "name _id")
+      .lean();
+    if (!result) {
+      return { status: false, message: "No Music With Such ID Found" };
+    }
+    return { status: true, music: result };
+  } catch (err) {
+    console.error(err);
+    return { status: false, message: err };
   }
-  return { status: true, music: result };
 };
 
 export const getMusicByPage = async ({ limit, offset }) => {

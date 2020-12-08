@@ -1,9 +1,14 @@
 const express = require("express");
-const { createMusicController } = require("../controllers/music");
-const { getUserController } = require("../controllers/user");
+const {
+  createMusicController,
+  getSingleMusicController,
+  getMusicSuggestionsController,
+  getMusicByPageController,
+} = require("../controllers/music");
 const router = express.Router();
 
 import passport from "passport";
+import { getMusicByPage } from "../services/music";
 
 const authenticator = (req, res, next) =>
   passport.authenticate("jwt", { session: false }, (err, user) => {
@@ -16,9 +21,13 @@ const authenticator = (req, res, next) =>
   })(req, res, next);
 
 //Get Random Music
-router.get("/", getUserController);
+router.get("/suggestions", getMusicSuggestionsController);
+
 //Get A Specific Music ID
-router.get("/:musicId", getUserController);
+router.get("/:musicId", getSingleMusicController);
+
+//Get By Page
+router.get("/", getMusicByPageController);
 
 router.post("/", authenticator, createMusicController);
 
