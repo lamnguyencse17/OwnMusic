@@ -22,7 +22,7 @@ export const validateCreateArtist = ({ email, password, name, coverURL }) => {
   }
   if (!isValidURL(coverURL)) {
     status = false;
-    message.push("Invalid password");
+    message.push("Invalid Cover URL");
   }
   return { status, message };
 };

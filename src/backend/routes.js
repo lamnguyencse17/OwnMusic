@@ -24,7 +24,7 @@ const authenticator = (req, res, next) =>
 // router.use("/invite", authenticator, require("./routes/invite"));
 
 router.use("/user", authenticator, require("./routes/user"));
-router.use("/music", authenticator, require("./routes/music"));
+router.use("/music", require("./routes/music"));
 router.use("/artist", require("./routes/artist"));
 router.use("/auth/register", require("./routes/auth/register"));
 router.use("/auth/login", require("./routes/auth/login"));

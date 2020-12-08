@@ -1,15 +1,37 @@
 import musicModel from "../models/musics";
 import mongoose from "mongoose";
 
-export const createMusic = async ({ name, description, coverURL, demoURL, downloadURL, price, artist }) => {
-  const result = await musicModel.create({
-    name, description, coverURL, demoURL, downloadURL, price, artist: mongoose.Types.ObjectId(artist)
-  });
-  return { result, status: true };
+export const createMusic = async ({
+  name,
+  description,
+  coverURL,
+  demoURL,
+  downloadURL,
+  price,
+  artist,
+}) => {
+  try {
+    const result = await musicModel.create({
+      name,
+      description,
+      coverURL,
+      demoURL,
+      downloadURL,
+      price,
+      artist: mongoose.Types.ObjectId(artist),
+    });
+    return { music: result, status: true };
+  } catch (err) {
+    return { status: false, message: err };
+  }
 };
 
 export const getSingleMusic = async (musicId) => {
-  const result = await musicModel.findOne({ _id: mongoose.Types.ObjectId(musicId) }).select("-downloadURL").populate("artist", "name _id").lean();
+  const result = await musicModel
+    .findOne({ _id: mongoose.Types.ObjectId(musicId) })
+    .select("-downloadURL")
+    .populate("artist", "name _id")
+    .lean();
   if (!result) {
     return { status: false, message: "No Music With Such ID Found" };
   }
@@ -18,7 +40,13 @@ export const getSingleMusic = async (musicId) => {
 
 export const getMusicByPage = async ({ limit, offset }) => {
   try {
-    const result = await musicModel.find({}).skip(offset).limit(limit).select("-downloadURL").populate("artist", "name _id").lean();
+    const result = await musicModel
+      .find({})
+      .skip(offset)
+      .limit(limit)
+      .select("-downloadURL")
+      .populate("artist", "name _id")
+      .lean();
     return { status: true, music: result };
   } catch (err) {
     console.error(err);

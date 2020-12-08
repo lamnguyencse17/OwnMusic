@@ -67,3 +67,16 @@ export const getArtistByEmail = async (email) => {
     return { status: false, message: err };
   }
 };
+
+export const addMusicToArtist = async (artistId, songId) => {
+  try {
+    await artistModel.findOneAndUpdate(
+      { _id: mongoose.Types.ObjectId(artistId) },
+      { $push: { musics: mongoose.Types.ObjectId(songId) } }
+    );
+    return { status: true };
+  } catch (err) {
+    console.error(err);
+    return { status: false, message: err };
+  }
+};

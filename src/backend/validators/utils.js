@@ -24,3 +24,7 @@ export const isValidName = (name) => {
 export const isValidURL = (url) => {
   return !!url && !isEmpty(url) && isURL(url);
 };
+
+export const isValidNumber = (number) => {
+  return !isNaN(number) && number >= 0;
+};
