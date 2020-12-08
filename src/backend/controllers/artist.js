@@ -3,6 +3,8 @@ import {
   createArtist,
   getArtistByEmail,
   getArtistByIdAsUser,
+  getArtistByPage,
+  getArtistSuggestions,
 } from "../services/artist";
 import { hashPassword, comparePassword } from "../utils/password";
 import createToken from "../utils/token";
@@ -81,5 +83,25 @@ export const getArtistAsUserController = async (req, res) => {
     return res.status(HANDLED_ERROR_RESPONSE).json({ message });
   }
   delete artist.password;
+  return res.status(OK_RESPONSE).json(artist);
+};
+
+export const getArtistSuggestionsController = async (req, res) => {
+  const { music, message, status } = await getArtistSuggestions();
+  if (!status) {
+    return res.status(HANDLED_ERROR_RESPONSE).json({ message });
+  }
+  return res.status(OK_RESPONSE).json(music);
+};
+
+export const getArtistByPageController = async (req, res) => {
+  const { offset, limit } = req.query;
+  const { artist, message, status } = await getArtistByPage({
+    limit: parseInt(limit),
+    offset: parseInt(offset),
+  });
+  if (!status) {
+    return res.status(HANDLED_ERROR_RESPONSE).json({ message });
+  }
   return res.status(OK_RESPONSE).json(artist);
 };

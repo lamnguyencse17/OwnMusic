@@ -80,3 +80,24 @@ export const addMusicToArtist = async (artistId, songId) => {
     return { status: false, message: err };
   }
 };
+
+export const getArtistSuggestions = async () => {
+  try {
+    const result = await artistModel.aggregate([{ $sample: { size: 5 } }]);
+    console.log(result);
+    return { status: true, artist: result };
+  } catch (err) {
+    console.error(err);
+    return { status: false, message: err };
+  }
+};
+
+export const getArtistByPage = async ({ limit, offset }) => {
+  try {
+    const result = await musicModel.find({}).skip(offset).limit(limit).lean();
+    return { status: true, artist: result };
+  } catch (err) {
+    console.error(err);
+    return { status: false, message: err };
+  }
+};

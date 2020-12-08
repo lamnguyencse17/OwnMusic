@@ -8,7 +8,6 @@ const {
 const router = express.Router();
 
 import passport from "passport";
-import { getMusicByPage } from "../services/music";
 
 const authenticator = (req, res, next) =>
   passport.authenticate("jwt", { session: false }, (err, user) => {
