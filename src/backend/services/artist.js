@@ -1,4 +1,5 @@
 import artistModel from "../models/artist";
+import musicModel from "../models/musics";
 import mongoose from "mongoose";
 
 export const createArtist = async ({

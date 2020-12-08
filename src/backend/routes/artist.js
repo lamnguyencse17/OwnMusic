@@ -1,11 +1,7 @@
 const express = require("express");
-const { getUserController } = require("../controllers/user");
+const { getArtistAsUserController } = require("../controllers/artist");
 const router = express.Router();
 
-
-//Get Random Artist
-router.get("/", getUserController);
-//Get A Specific Artist ID
-router.get("/:artistId", getUserController);
+router.get("/:artistId", getArtistAsUserController);
 
 module.exports = router;
