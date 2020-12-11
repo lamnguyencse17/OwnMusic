@@ -13,13 +13,18 @@ export const createTransaction = async ({
   success_url,
   cancel_url,
 }) => {
-  const createTransactionResult = await coinpaymentClient.createTransaction({
-    amount,
-    buyer_email,
-    success_url,
-    cancel_url,
-    currency1: "USD",
-    currency2: "LTCT",
-  });
-  return createTransactionResult;
+  try {
+    const createTransactionResult = await coinpaymentClient.createTransaction({
+      amount,
+      buyer_email,
+      success_url,
+      cancel_url,
+      currency1: "USD",
+      currency2: "LTCT",
+    });
+    return { status: true, transaction: createTransactionResult };
+  } catch (err) {
+    console.error(err);
+    return { status: false, message: err };
+  }
 };

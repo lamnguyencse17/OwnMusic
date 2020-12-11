@@ -13,6 +13,7 @@ module.exports = (passport) => {
         let user = await getUserById(jwt_payload._id);
         if (user) {
           req._id = jwt_payload._id;
+          req.email = jwt_payload.email;
           return done(null, user);
         }
         return done(null, false);
