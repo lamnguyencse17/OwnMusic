@@ -98,3 +98,21 @@ export const getMusicSuggestions = async () => {
     return { status: false, message: err };
   }
 };
+
+export const doMusicsExist = async (musics) => {
+  musics = musics.map((music) => mongoose.Types.ObjectId(music));
+  try {
+    const foundMusics = await (
+      await musicModel.findOne({ _id: { $in: [musics] } })
+    )
+      .select({ _id: 1 })
+      .lean();
+    if (musics.length !== foundMusics.lenght) {
+      return { status: false, message: "Some music can't be found" };
+    }
+    return { status: true };
+  } catch (err) {
+    console.error(err);
+    return { status: false, message: err };
+  }
+};

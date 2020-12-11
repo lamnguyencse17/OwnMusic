@@ -1,7 +1,8 @@
 const express = require("express");
 const {
   handlePurchaseController,
-  handleSuccessPurchase,
+  handleCancelledPurchaseController,
+  handleSuccessPurchaseController,
 } = require("../controllers/purchase");
 const { getUserController } = require("../controllers/user");
 const router = express.Router();
@@ -9,8 +10,8 @@ const router = express.Router();
 //Get Some Purchases Of User
 router.get("/", getUserController);
 //Get A Specific Purhcase ID
-router.get("/:purchaseId/cancel", getUserController);
-router.get("/:purchaseId/success", handleSuccessPurchase);
+router.get("/:purchaseId/cancel", handleCancelledPurchaseController);
+router.get("/:purchaseId/success", handleSuccessPurchaseController);
 
 router.post("/", handlePurchaseController);
 

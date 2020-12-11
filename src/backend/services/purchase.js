@@ -37,9 +37,27 @@ export const getPurchaseById = async (purchaseId) => {
 
 export const setPurchaseComplete = async (purchaseId) => {
   try {
-    await purchaseModel.findOneAndUpdate({
-      _id: mongoose.Types.ObjectId(purchaseId),
-    });
+    await purchaseModel.findOneAndUpdate(
+      {
+        _id: mongoose.Types.ObjectId(purchaseId),
+      },
+      { isPending: false, isCompleted: true }
+    );
+    return { status: true };
+  } catch (err) {
+    console.error(err);
+    return { status: false, message: err };
+  }
+};
+
+export const setPurchaseCancelled = async (purchaseId) => {
+  try {
+    await purchaseModel.findOneAndUpdate(
+      {
+        _id: mongoose.Types.ObjectId(purchaseId),
+      },
+      { isPending: false, isCompleted: false }
+    );
     return { status: true };
   } catch (err) {
     console.error(err);
