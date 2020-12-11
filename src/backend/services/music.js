@@ -44,6 +44,17 @@ export const getSingleMusic = async (musicId) => {
   }
 };
 
+export const getMusicsById = async (musics) => {
+  musics = musics.map((music) => mongoose.Types.ObjectId(music));
+  try {
+    const result = await musicModel.find({ _id: { $in: musics } }).lean();
+    return { status: true, musics: result };
+  } catch (err) {
+    console.error(err);
+    return { status: false, message: err };
+  }
+};
+
 export const getMusicByPage = async ({ limit, offset }) => {
   try {
     const result = await musicModel

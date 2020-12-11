@@ -11,6 +11,7 @@ export const purchaseSchema = new Purchases({
   },
   musics: [{ type: mongoose.Schema.Types.ObjectId, ref: "Musics" }],
   isCompleted: { type: Boolean, required: true },
+  isPending: { type: Boolean, required: true },
 });
 
 const purchaseModel = mongoose.model("Purchases", purchaseSchema);
