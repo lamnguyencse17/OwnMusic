@@ -20,6 +20,25 @@ export const createPurchase = async ({ user, artist, musics }) => {
   }
 };
 
+export const getPurchaseOfUser = async (userId, { limit, offset }) => {
+  try {
+    const purchase = await purchaseModel
+      .find({ user: mongoose.Types.ObjectId })
+      .skip(offset)
+      .limit(limit)
+      .populate("musics", "-artist")
+      .populate("artist", "-password")
+      .lean();
+    if (!purchase) {
+      return { status: false, message: "No purchase found" };
+    }
+    return { status: true, purchase };
+  } catch (err) {
+    console.error(err);
+    return { status: false, message: err };
+  }
+};
+
 export const getPurchaseById = async (purchaseId) => {
   try {
     const purchase = await purchaseModel

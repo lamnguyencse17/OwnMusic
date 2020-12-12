@@ -3,12 +3,12 @@ const {
   handlePurchaseController,
   handleCancelledPurchaseController,
   handleSuccessPurchaseController,
+  getUserPurchaseController,
 } = require("../controllers/purchase");
-const { getUserController } = require("../controllers/user");
 const router = express.Router();
 
 //Get Some Purchases Of User
-router.get("/", getUserController);
+router.get("/", getUserPurchaseController);
 //Get A Specific Purhcase ID
 router.get("/:purchaseId/cancel", handleCancelledPurchaseController);
 router.get("/:purchaseId/success", handleSuccessPurchaseController);

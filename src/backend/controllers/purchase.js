@@ -5,6 +5,7 @@ import { doMusicsExist, getMusicsById } from "../services/music";
 import {
   createPurchase,
   getPurchaseById,
+  getPurchaseOfUser,
   setPurchaseCancelled,
   setPurchaseComplete,
 } from "../services/purchase";
@@ -12,6 +13,19 @@ import {
   validateNewPurchase,
   validatePurchaseId,
 } from "../validators/purchaseValidator";
+
+export const getUserPurchaseController = async (req, res) => {
+  const userId = req._id;
+  const { limit, offset } = req.params;
+  const { purchase, status, message } = await getPurchaseOfUser(userId, {
+    limit,
+    offset,
+  });
+  if (!status) {
+    return res.status(HANDLED_ERROR_RESPONSE).json({ message });
+  }
+  return res.status(OK_RESPONSE).json({ purchase });
+};
 
 export const handlePurchaseController = async (req, res) => {
   const { _id, email } = req;
