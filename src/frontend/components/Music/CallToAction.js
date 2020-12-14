@@ -1,10 +1,11 @@
 import React from "react";
 
 function CallToAction(props) {
+  const { _id, price } = props;
   return (
     <div>
-      <h1>Price: $5</h1>
-      <button className="bg-white w-20 h-10">Buy Now!</button>
+      <h1>Price: {price}</h1>
+      <button className="w-20 h-10 bg-white">Buy Now!</button>
     </div>
   );
 }

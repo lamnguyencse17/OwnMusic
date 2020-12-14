@@ -1,10 +1,11 @@
 import React from "react";
 
 function ArtistInfo(props) {
+  const { name, description } = props;
   return (
     <div>
-      <h1>Artist Name</h1>
-      <h2>Some Description</h2>
+      <h1>{name}</h1>
+      <h2>{description}</h2>
     </div>
   );
 }

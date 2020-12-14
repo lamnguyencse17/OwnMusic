@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
-export default function Cover() {
-    return (
-        <div>
-          <img src="https://onlymevip.com/postuploads/profilepictures/default_cover.jpg"/>
-        </div>
-    );
+export default function Cover(props) {
+  return (
+    <div>
+      <img src={props.coverURL} />
+    </div>
+  );
 }
