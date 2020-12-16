@@ -13,3 +13,17 @@ export const getArtistRequest = async (artistId) => {
     };
   }
 };
+
+export const getArtistByPageRequest = async ({ offset, limit }) => {
+  const artistPageUrl = `${process.env.BACKEND_SERVER}/api/artist?offset=${offset}&limit=${limit}`;
+  try {
+    const res = await axios.get(artistPageUrl);
+    return { status: true, artist: res.data };
+  } catch (err) {
+    return {
+      status: false,
+      errCode: err.response.status,
+      message: err.response.data.message,
+    };
+  }
+};

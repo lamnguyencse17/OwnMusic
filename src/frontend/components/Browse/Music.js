@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getMusicByPageRequest } from "../../requests/music";
-import Card from "./Card";
+import MusicCard from "./MusicCard";
 
 export default function Music() {
   const initialControl = { offset: 0, limit: 5 };
@@ -31,7 +31,7 @@ export default function Music() {
         <>
           <ul className="px-0 py-10">
             {musicContent.map((music) => (
-              <Card {...music} key={music._id} />
+              <MusicCard {...music} key={music._id} />
             ))}
           </ul>
           <button

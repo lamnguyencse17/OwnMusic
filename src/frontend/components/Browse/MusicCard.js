@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function Card(props) {
+export default function MusicCard(props) {
   return (
     <li className="grid grid-cols-12 px-3 py-3 list-none border rounded-sm">
       <div className="col-span-1">
