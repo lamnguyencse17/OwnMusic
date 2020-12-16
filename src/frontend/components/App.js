@@ -14,6 +14,7 @@ import Register from "./Register";
 import Artist from "./Artist";
 import { getActiveElement } from "formik";
 import Music from "./Music";
+import Browse from "./Browse";
 
 class App extends Component {
   constructor(props) {
@@ -62,19 +63,18 @@ class App extends Component {
               exact
             />
             <Route path="/artist">
-            <Route
+              <Route
                 path="/artist/:artistId"
                 render={() => <Artist {...this.props} />}
-                exact
               />
             </Route>
             <Route path="/music">
               <Route
                 path="/music/:musicId"
                 render={() => <Music {...this.props} />}
-                exact
               />
             </Route>
+            <Route path="/browse" render={() => <Browse {...this.props} />} />
             {/* <Route path="/main" render={() => <Main {...this.props} />} exact />
             <Route
               path="/"

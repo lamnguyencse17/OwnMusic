@@ -2,7 +2,7 @@ import React from "react";
 import Logo from "./Navbar/Logo";
 import Nav from "./Navbar/Nav";
 import SearchBar from "./Navbar/SearchBar";
-import Slogan from "./Navbar/Slogan";
+import Nav2 from "./Navbar/Nav2";
 
 export default function Navbar() {
   return (
@@ -12,7 +12,7 @@ export default function Navbar() {
     >
       <Logo />
       <SearchBar />
-      <Slogan />
+      <Nav2 />
       <Nav />
     </div>
   );

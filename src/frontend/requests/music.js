@@ -27,3 +27,17 @@ export const getMusicRequest = async (musicId) => {
     };
   }
 };
+
+export const getMusicByPageRequest = async ({ offset, limit }) => {
+  const musicPageUrl = `${process.env.BACKEND_SERVER}/api/music?offset=${offset}&limit=${limit}`;
+  try {
+    const res = await axios.get(musicPageUrl);
+    return { status: true, music: res.data };
+  } catch (err) {
+    return {
+      status: false,
+      errCode: err.response.status,
+      message: err.response.data.message,
+    };
+  }
+};
