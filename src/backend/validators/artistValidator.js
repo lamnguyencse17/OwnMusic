@@ -2,7 +2,7 @@ import {
   isValidEmail,
   isValidPassword,
   isValidName,
-  isValidURL,
+  // isValidURL,
 } from "./utils";
 
 export const validateCreateArtist = ({ email, password, name, coverURL }) => {
@@ -20,9 +20,9 @@ export const validateCreateArtist = ({ email, password, name, coverURL }) => {
     status = false;
     message.push("Invalid password");
   }
-  if (!isValidURL(coverURL)) {
-    status = false;
-    message.push("Invalid Cover URL");
-  }
+  // if (!isValidURL(coverURL)) {
+  //   status = false;
+  //   message.push("Invalid Cover URL");
+  // }
   return { status, message };
 };

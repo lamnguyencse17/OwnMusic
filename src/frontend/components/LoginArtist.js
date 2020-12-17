@@ -1,46 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik } from "formik";
-import { createRegisterRequest } from "../requests/user";
-import { validateCreateUser } from "../validators/userValidator";
+import { createArtistLoginRequest } from "../requests/user";
+import { validateLogInUser } from "../validators/userValidator";
+import { useDispatch } from "react-redux";
+import { setUser } from "../actions/user";
+import { useHistory } from "react-router-dom";
 
-const validateRegisterForm = (values) => {
-  const { email, password, name, password2 } = values;
-  const { status, message } = validateCreateUser({
-    email,
-    password,
-    name,
-    password2,
-  });
+const validateLoginForm = (values) => {
+  const { email, password } = values;
+  const { status, message } = validateLogInUser({ email, password });
   if (status === false) {
-    if (
-      message.email !== "" ||
-      message.password !== "" ||
-      message.password2 !== "" ||
-      message.name !== ""
-    ) {
+    if (message.email !== "" || message.password !== "") {
       return { ...message };
     }
   }
-  return {};
 };
-
-const submitRegisterForm = async (values, setSubmitting) => {
-  setSubmitting(true);
-  const { email, password, name } = values;
-  const { status, token, message } = createRegisterRequest({
-    email,
-    password,
-    name,
-  });
-  setSubmitting(false);
-  if (!status) {
-    console.error(message);
-  } else {
-    // Set User Here
-  }
-};
-
-export default function Register() {
+export default function LoginArtist() {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const submitLoginForm = async (values, setSubmitting) => {
+    setSubmitting(true);
+    const { email, password } = values;
+    const { status, token, message } = await createArtistLoginRequest({
+      email,
+      password,
+    });
+    if (!status) {
+      setSubmitting(false);
+      setError(message);
+    } else {
+      const result = dispatch(setUser({ token, type: "artist" }));
+      if (!result) {
+        setSubmitting(false);
+        setError("Something went wrong");
+        return;
+      }
+      history.push("/");
+    }
+  };
+  const [error, setError] = useState("");
   return (
     <div className="flex items-center justify-center min-h-screen px-4 py-12 bg-gray-50 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8">
@@ -51,14 +49,15 @@ export default function Register() {
             alt="Workflow"
           />
           <h2 className="mt-6 text-3xl font-extrabold text-center text-gray-900">
-            Register your account
+            Sign in to your artist account
           </h2>
+          {error === "" ? <></> : <h3>{error}</h3>}
         </div>
         <Formik
-          initialValues={{ email: "", password: "", name: "", password2: "" }}
-          validate={(values) => validateRegisterForm(values)}
-          onSubmit={(values, { setSubmitting }) =>
-            submitRegisterForm(values, setSubmitting)
+          initialValues={{ email: "", password: "" }}
+          validate={(values) => validateLoginForm(values)}
+          onSubmit={async (values, { setSubmitting }) =>
+            await submitLoginForm(values, setSubmitting)
           }
         >
           {({
@@ -72,24 +71,6 @@ export default function Register() {
             <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
               <input type="hidden" name="remember" value="true" />
               <div className="-space-y-px rounded-md shadow-sm">
-                <div>
-                  <label htmlFor="name" className="sr-only">
-                    Name
-                  </label>
-                  <input
-                    id="name"
-                    name="name"
-                    type="name"
-                    autoComplete="name"
-                    required
-                    className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                    placeholder="Name"
-                    disabled={isSubmitting}
-                    onChange={handleChange}
-                    value={values.name}
-                  />
-                  {errors.name && touched.name && errors.name}
-                </div>
                 <div>
                   <label htmlFor="email-address" className="sr-only">
                     Email address
@@ -125,23 +106,6 @@ export default function Register() {
                     value={values.password}
                   />
                   {errors.password && touched.password && errors.password}
-                </div>
-                <div>
-                  <label htmlFor="password2" className="sr-only">
-                    Password
-                  </label>
-                  <input
-                    id="password2"
-                    name="password2"
-                    type="password"
-                    required
-                    className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                    placeholder="Retype Your Password"
-                    disabled={isSubmitting}
-                    onChange={handleChange}
-                    value={values.password2}
-                  />
-                  {errors.password2 && touched.password2 && errors.password2}
                 </div>
               </div>
               <div>

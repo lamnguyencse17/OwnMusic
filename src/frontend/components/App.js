@@ -1,5 +1,5 @@
 import React, { Component, Suspense } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 const PageNotFound = React.lazy(() => import("./common/PageNotFound"));
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
@@ -12,9 +12,11 @@ import Navbar from "./common/Navbar";
 import Footer from "./common/Footer";
 import Register from "./Register";
 import Artist from "./Artist";
-import { getActiveElement } from "formik";
+import { setUser } from "../actions/user";
 import Music from "./Music";
 import Browse from "./Browse";
+import LoginArtist from "./LoginArtist";
+import RegisterArtist from "./RegisterArtist";
 
 class App extends Component {
   constructor(props) {
@@ -28,24 +30,16 @@ class App extends Component {
       }
     });
   }
-  //   async componentDidMount() {
-  //     const { setUser, history, token, location } = this.props;
-  //     let isLogin = await setUser();
-  //     if (!isLogin) {
-  //       history.push("/");
-  //     } else {
-  //       if (
-  //         // token &&
-  //         // token != "" &&
-  //         ["/login", "/signup", "/"].includes(location.pathname)
-  //       ) {
-  //         history.push("/main");
-  //       }
-  //     }
-  //   }
+  async componentDidMount() {
+    const type = await localStorage.getItem("type");
+    if (!type) {
+      return;
+    }
+    await this.props.setUser({ token: null, type });
+  }
 
   render() {
-    // const { token } = this.props;
+    const { userId } = this.props;
     return (
       <>
         <Navbar />
@@ -53,13 +47,43 @@ class App extends Component {
           <Switch>
             <Route path="/" render={() => <Landing {...this.props} />} exact />
             <Route
+              path="/login/artist"
+              render={() =>
+                userId === "" ? (
+                  <LoginArtist {...this.props} />
+                ) : (
+                  <Redirect to="/" />
+                )
+              }
+              exact
+            />
+            <Route
               path="/login"
-              render={() => <Login {...this.props} />}
+              render={() =>
+                userId === "" ? <Login {...this.props} /> : <Redirect to="/" />
+              }
+              exact
+            />
+            <Route
+              path="/register/artist"
+              render={() =>
+                userId === "" ? (
+                  <RegisterArtist {...this.props} />
+                ) : (
+                  <Redirect to="/" />
+                )
+              }
               exact
             />
             <Route
               path="/register"
-              render={() => <Register {...this.props} />}
+              render={() =>
+                userId === "" ? (
+                  <Register {...this.props} />
+                ) : (
+                  <Redirect to="/" />
+                )
+              }
               exact
             />
             <Route path="/artist">
@@ -75,13 +99,6 @@ class App extends Component {
               />
             </Route>
             <Route path="/browse" render={() => <Browse {...this.props} />} />
-            {/* <Route path="/main" render={() => <Main {...this.props} />} exact />
-            <Route
-              path="/"
-              token={token}
-              render={() => <Landing {...this.props} />}
-              exact
-            /> */}
             <Route path="*" component={PageNotFound} />
           </Switch>
         </Suspense>
@@ -91,15 +108,15 @@ class App extends Component {
   }
 }
 
-// function mapStateToProps(state) {
-//   return {
-//     token: state.user.token,
-//     userId: state.user._id,
-//   };
-// }
+function mapStateToProps(state) {
+  return {
+    token: state.user.token,
+    userId: state.user._id,
+  };
+}
 
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators({ setUser, clearUser }, dispatch);
-// }
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ setUser }, dispatch);
+}
 
-export default withRouter(connect(null, null)(App));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

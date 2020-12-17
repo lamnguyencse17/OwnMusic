@@ -1,7 +1,8 @@
 import React from "react";
 import { Formik } from "formik";
-import { createRegisterRequest } from "../requests/user";
+import { createArtistRegisterRequest } from "../requests/user";
 import { validateCreateUser } from "../validators/userValidator";
+import { useHistory } from "react-router-dom";
 
 const validateRegisterForm = (values) => {
   const { email, password, name, password2 } = values;
@@ -24,23 +25,23 @@ const validateRegisterForm = (values) => {
   return {};
 };
 
-const submitRegisterForm = async (values, setSubmitting) => {
-  setSubmitting(true);
-  const { email, password, name } = values;
-  const { status, token, message } = createRegisterRequest({
-    email,
-    password,
-    name,
-  });
-  setSubmitting(false);
-  if (!status) {
-    console.error(message);
-  } else {
-    // Set User Here
-  }
-};
-
-export default function Register() {
+export default function RegisterArtist() {
+  const history = useHistory();
+  const submitRegisterForm = async (values, setSubmitting) => {
+    setSubmitting(true);
+    const { email, password, name } = values;
+    const { status, token, message } = await createArtistRegisterRequest({
+      email,
+      password,
+      name,
+    });
+    setSubmitting(false);
+    if (!status) {
+      console.error(message);
+    } else {
+      history.push("/login/artist");
+    }
+  };
   return (
     <div className="flex items-center justify-center min-h-screen px-4 py-12 bg-gray-50 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8">
@@ -51,7 +52,7 @@ export default function Register() {
             alt="Workflow"
           />
           <h2 className="mt-6 text-3xl font-extrabold text-center text-gray-900">
-            Register your account
+            Register your artist account
           </h2>
         </div>
         <Formik

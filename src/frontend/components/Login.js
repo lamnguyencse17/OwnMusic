@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik } from "formik";
 import { createLoginRequest } from "../requests/user";
 import { validateLogInUser } from "../validators/userValidator";
+import { useDispatch } from "react-redux";
+import { setUser } from "../actions/user";
+import { useHistory } from "react-router-dom";
 
 const validateLoginForm = (values) => {
   const { email, password } = values;
@@ -13,19 +16,30 @@ const validateLoginForm = (values) => {
   }
 };
 
-const submitLoginForm = async (values, setSubmitting) => {
-  setSubmitting(true);
-  const { email, password } = values;
-  const { status, token, message } = createLoginRequest({ email, password });
-  setSubmitting(false);
-  if (!status) {
-    console.error(message);
-  } else {
-    // Set User Here
-  }
-};
-
 export default function Login() {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const submitLoginForm = async (values, setSubmitting) => {
+    setSubmitting(true);
+    const { email, password } = values;
+    const { status, token, message } = await createLoginRequest({
+      email,
+      password,
+    });
+    if (!status) {
+      setSubmitting(false);
+      console.error(message);
+    } else {
+      const result = await dispatch(setUser({ token, type: "user" }));
+      if (!result) {
+        setSubmitting(false);
+        setError("Something went wrong");
+        return;
+      }
+      history.push("/");
+    }
+  };
+  const [error, setError] = useState("");
   return (
     <div className="flex items-center justify-center min-h-screen px-4 py-12 bg-gray-50 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8">
@@ -39,11 +53,12 @@ export default function Login() {
             Sign in to your account
           </h2>
         </div>
+        {error === "" ? <></> : <h3>{error}</h3>}
         <Formik
           initialValues={{ email: "", password: "" }}
           validate={(values) => validateLoginForm(values)}
-          onSubmit={(values, { setSubmitting }) =>
-            submitLoginForm(values, setSubmitting)
+          onSubmit={async (values, { setSubmitting }) =>
+            await submitLoginForm(values, setSubmitting)
           }
         >
           {({
