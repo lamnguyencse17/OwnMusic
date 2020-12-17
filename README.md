@@ -14,6 +14,9 @@ Quickstart:
 - Run backend: npm run be
 - Run tailwindcss: npm run css:watch
 
+Frontend URL: http://localhost:8080
+Backend URL: http://localhost:3000
+
 Alternatives:
 
 - Install MongoDB
