@@ -112,11 +112,10 @@ export const getArtistByPage = async ({ limit, offset }) => {
 
 export const doesArtistExist = async (artistId) => {
   try {
-    const artist = await (
-      await artistModel.findOne({ _id: mongoose.Types.ObjectId(artistId) })
-    )
-      .select({ _id: 1 })
+    const artist = await artistModel
+      .findOne({ _id: mongoose.Types.ObjectId(artistId) })
       .lean();
+
     if (!artist) {
       return { status: false, message: "No Artist Found" };
     }

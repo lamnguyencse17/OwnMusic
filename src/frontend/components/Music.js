@@ -42,7 +42,7 @@ function Music(props) {
                   name={music.name}
                   description={music.description}
                 />
-                <CallToAction price={music.price} _id={music._id} />
+                <CallToAction price={music.price} _id={music._id} artist={music.artist._id} amount={music.amount} />
               </div>
             </div>
             <Suggestions />
