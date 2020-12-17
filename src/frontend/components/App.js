@@ -17,6 +17,7 @@ import Music from "./Music";
 import Browse from "./Browse";
 import LoginArtist from "./LoginArtist";
 import RegisterArtist from "./RegisterArtist";
+import Dashboard from "./Dashboard";
 
 class App extends Component {
   constructor(props) {
@@ -39,7 +40,7 @@ class App extends Component {
   }
 
   render() {
-    const { userId } = this.props;
+    const { userId, type } = this.props;
     return (
       <>
         <Navbar />
@@ -92,6 +93,16 @@ class App extends Component {
                 render={() => <Artist {...this.props} />}
               />
             </Route>
+            <Route
+              path="/dashboard"
+              render={() =>
+                userId === "" && type !== "artist" ? (
+                  <Redirect to="/" />
+                ) : (
+                  <Dashboard {...this.props} />
+                )
+              }
+            />
             <Route path="/music">
               <Route
                 path="/music/:musicId"
@@ -112,6 +123,7 @@ function mapStateToProps(state) {
   return {
     token: state.user.token,
     userId: state.user._id,
+    type: state.user.type,
   };
 }
 

@@ -41,3 +41,33 @@ export const getMusicByPageRequest = async ({ offset, limit }) => {
     };
   }
 };
+
+export const createMusicRequest = async ({
+  name,
+  description,
+  coverURL,
+  demoURL,
+  downloadURL,
+  price,
+}) => {
+  const createMusicUrl = `${process.env.BACKEND_SERVER}/api/music`;
+  try {
+    const res = await axios.post(createMusicUrl, {
+      name,
+      description,
+      coverURL,
+      demoURL,
+      downloadURL,
+      price,
+    });
+    console.log(res.data);
+    return { status: true, music: res.data };
+  } catch (err) {
+    console.log(err.response.data.message);
+    return {
+      status: false,
+      errCode: err.response.status,
+      message: err.response.data.message,
+    };
+  }
+};

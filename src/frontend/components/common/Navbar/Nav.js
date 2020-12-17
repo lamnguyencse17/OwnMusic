@@ -3,10 +3,10 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export default function Nav() {
-  const userId = useSelector((state) => state.user._id);
+  const { _id, type } = useSelector((state) => state.user);
   return (
     <div className="space-x-3">
-      {userId === "" ? (
+      {_id === "" ? (
         <>
           {" "}
           <Link to="/register">
@@ -17,7 +17,10 @@ export default function Nav() {
           </Link>
         </>
       ) : (
-        <Link to="/logout">Logout</Link>
+        <>
+          {type !== "artist" ? <></> : <Link to="/dashboard">Dashboard</Link>}
+          <Link to="/logout">Logout</Link>
+        </>
       )}
     </div>
   );

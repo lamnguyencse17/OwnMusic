@@ -22,6 +22,7 @@ export const isValidName = (name) => {
 };
 
 export const isValidURL = (url) => {
+  console.log(url);
   return !!url && !isEmpty(url) && isURL(url);
 };
 

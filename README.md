@@ -1,2 +1,11 @@
 OwnMusic
-[![<OwnMusic>](https://circleci.com/gh/lamnguyencse17/OwnMusic.svg?style=svg)](<https://app.circleci.com/pipelines/github/lamnguyencse17/OwnMusic>)
+[![<OwnMusic>](https://circleci.com/gh/lamnguyencse17/OwnMusic.svg?style=svg)](https://app.circleci.com/pipelines/github/lamnguyencse17/OwnMusic)
+
+Add artist full info:
+{
+name,
+description,
+coverURL,
+password,
+email
+}

@@ -10,6 +10,7 @@ import { validateCreateMusic } from "../validators/musicValidator";
 
 export const createMusicController = async (req, res) => {
   const { name, description, coverURL, demoURL, downloadURL, price } = req.body;
+  console.log(req.body);
   const artist = req._id;
   const validateMusicResult = validateCreateMusic({
     name,

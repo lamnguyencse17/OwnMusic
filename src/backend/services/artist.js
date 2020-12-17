@@ -28,6 +28,7 @@ export const getArtistById = async (_id) => {
   try {
     const result = await artistModel
       .findOne({ _id: mongoose.Types.ObjectId(_id) })
+      .populate({ path: "musics", select: "-artist" })
       .lean();
     if (!result) {
       return { status: false, message: "No Artist With Such ID" };
