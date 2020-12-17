@@ -17,6 +17,11 @@ Quickstart:
 Frontend URL: http://localhost:8080
 Backend URL: http://localhost:3000
 
+Auth API: http://localhost:3000/api/auth/(register||login||register/artist||login/artist)
+User API: http://localhost:3000/api/user/(artist)
+Artust API: http://localhost:3000/api/artist/(suggestions||:artistId)
+Music API: http://localhost:3000/api/music/(sugesstions||:musicID)
+
 Alternatives:
 
 - Install MongoDB
