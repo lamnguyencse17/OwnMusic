@@ -16,7 +16,7 @@ export default function Suggestions() {
   }, []);
   return (
     <div>
-      <h3>Your Daily Suggestions</h3>
+      <div className="py-5 text-2xl text-white">Your Daily Suggestions</div>
       {error === "" ? <></> : <h3>error</h3>}
       <div className="grid grid-cols-5">
         {suggestion.map((music) => (
