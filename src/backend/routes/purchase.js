@@ -11,7 +11,7 @@ const router = express.Router();
 router.get("/", getUserPurchaseController);
 //Get A Specific Purhcase ID
 router.get("/:purchaseId/cancel", handleCancelledPurchaseController);
-router.get("/:purchaseId/success", handleSuccessPurchaseController);
+router.use("/:purchaseId/success", handleSuccessPurchaseController);
 
 router.post("/", handlePurchaseController);
 

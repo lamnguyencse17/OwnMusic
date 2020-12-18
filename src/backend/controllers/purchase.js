@@ -59,7 +59,6 @@ export const handlePurchaseController = async (req, res) => {
       .json({ message: createPurchaseStatus.message });
   }
   const { purchase } = createPurchaseStatus;
-  // purchase id is not disclosed till user access so it's impossible to forge a purchase
   const success_url = `${process.env.BACKEND_SERVER}/purchase/${purchase._id}/success/`;
   const cancel_url = `${process.env.BACKEND_SERVER}/purchase/${purchase._id}/cancel/`;
   const createTransactionResult = await createTransaction({
@@ -67,6 +66,7 @@ export const handlePurchaseController = async (req, res) => {
     buyer_email: email,
     cancel_url,
     success_url,
+    transaction: purchase._id,
   });
   if (!createTransactionResult.status) {
     return res
@@ -92,7 +92,7 @@ export const handleSuccessPurchaseController = async (req, res) => {
       .status(HANDLED_ERROR_RESPONSE)
       .json({ message: getPurchaseResult.message });
   }
-  const { isCompleted, isPending, musics } = getPurchaseResult.purchase;
+  const { isCompleted, isPending } = getPurchaseResult.purchase;
   if (!isPending && isCompleted) {
     return res
       .status(HANDLED_ERROR_RESPONSE)
@@ -103,19 +103,19 @@ export const handleSuccessPurchaseController = async (req, res) => {
       .status(HANDLED_ERROR_RESPONSE)
       .json({ message: "This purchase has been completed" });
   }
-  const setCompleteResult = await setPurchaseComplete(purchaseId);
-  if (!setCompleteResult.status) {
-    return res
-      .status(HANDLED_ERROR_RESPONSE)
-      .json({ message: setCompleteResult.message });
-  }
-  const getDownloadResult = await getMusicsById(musics);
-  if (!getDownloadResult.status) {
-    return res
-      .status(HANDLED_ERROR_RESPONSE)
-      .json({ message: getDownloadResult.message });
-  }
-  return res.status(OK_RESPONSE).json({ downloads: getDownloadResult.musics });
+  // const setCompleteResult = await setPurchaseComplete(purchaseId);
+  // if (!setCompleteResult.status) {
+  //   return res
+  //     .status(HANDLED_ERROR_RESPONSE)
+  //     .json({ message: setCompleteResult.message });
+  // }
+  // const getDownloadResult = await getMusicsById(musics);
+  // if (!getDownloadResult.status) {
+  //   return res
+  //     .status(HANDLED_ERROR_RESPONSE)
+  //     .json({ message: getDownloadResult.message });
+  // }
+  return res.status(OK_RESPONSE).json({ message: "Purchase is completed" });
 };
 
 export const handleCancelledPurchaseController = async (req, res) => {
@@ -141,11 +141,11 @@ export const handleCancelledPurchaseController = async (req, res) => {
       .status(HANDLED_ERROR_RESPONSE)
       .json({ message: "This purchase has been cancelled" });
   }
-  const setCancelledResult = await setPurchaseCancelled(purchaseId);
-  if (!setCancelledResult.status) {
-    return res
-      .status(HANDLED_ERROR_RESPONSE)
-      .json({ message: setCancelledResult.message });
-  }
+  // const setCancelledResult = await setPurchaseCancelled(purchaseId);
+  // if (!setCancelledResult.status) {
+  //   return res
+  //     .status(HANDLED_ERROR_RESPONSE)
+  //     .json({ message: setCancelledResult.message });
+  // }
   return res.status(OK_RESPONSE).json({ message: "Purchase is cancelled" });
 };

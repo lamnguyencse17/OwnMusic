@@ -105,7 +105,6 @@ export const doMusicsExist = async (musics) => {
     const foundMusics = await musicModel
       .find({ _id: { $in: [musics] } })
       .lean();
-    console.log(foundMusics);
     if (musics.length !== foundMusics.length) {
       return { status: false, message: "Some music can't be found" };
     }

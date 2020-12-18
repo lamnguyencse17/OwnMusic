@@ -15,6 +15,7 @@ export default function Artist(props) {
     if (
       artist === undefined ||
       artist.musics.length === 0 ||
+      artist._id !== artistId ||
       typeof artist.musics[0] !== "object"
     ) {
       (async () => {

@@ -12,7 +12,7 @@ function Music(props) {
   let [music, setMusic] = useState(props.location.state);
   let [error, setError] = useState("");
   useEffect(() => {
-    if (music === undefined) {
+    if (music === undefined || music._id !== musicId) {
       (async () => {
         const { status, message, music } = await getMusicRequest(musicId);
         if (!status) {
@@ -42,7 +42,12 @@ function Music(props) {
                   name={music.name}
                   description={music.description}
                 />
-                <CallToAction price={music.price} _id={music._id} artist={music.artist._id} amount={music.amount} />
+                <CallToAction
+                  price={music.price}
+                  _id={music._id}
+                  artist={music.artist._id}
+                  amount={music.amount}
+                />
               </div>
             </div>
             <Suggestions />
