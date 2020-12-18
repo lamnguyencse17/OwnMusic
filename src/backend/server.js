@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 import passport from "passport";
 import app from "./app";
-import lodash from "lodash";
 import { transactionStatus } from "./services/coinpayment";
 
 mongoose.connect(process.env.MONGODB_URI, {

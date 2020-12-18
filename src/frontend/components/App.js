@@ -11,14 +11,19 @@ import Login from "./Login";
 import Navbar from "./common/Navbar";
 import Footer from "./common/Footer";
 import Register from "./Register";
-import Artist from "./Artist";
+// import Artist from "./Artist";
 import { setUser } from "../actions/user";
 import Music from "./Music";
 import Browse from "./Browse";
-import LoginArtist from "./LoginArtist";
-import RegisterArtist from "./RegisterArtist";
-import Dashboard from "./Dashboard";
-import Purchase from "./Purchase";
+// import LoginArtist from "./LoginArtist";
+// import RegisterArtist from "./RegisterArtist";
+// import Dashboard from "./Dashboard";
+// import Purchase from "./Purchase";
+const Dashboard = React.lazy(() => import("./Dashboard"));
+const Purchase = React.lazy(() => import("./Purchase"));
+const RegisterArtist = React.lazy(() => import("./RegisterArtist"));
+const LoginArtist = React.lazy(() => import("./LoginArtist"));
+const Artist = React.lazy(() => import("./Artist"));
 
 class App extends Component {
   constructor(props) {
@@ -44,101 +49,89 @@ class App extends Component {
 
   render() {
     const { userId, type } = this.props;
+    console.log(this.props);
     return (
       <>
         <Navbar />
-        {!this.state.isValidated ? (
+        {/* {!this.state.isValidated ? (
           <></>
-        ) : (
-          <Suspense fallback={<div className="loader"></div>}>
-            <Switch>
+        ) : ( */}
+        <Suspense fallback={<div className="loader"></div>}>
+          <Switch>
+            <Route path="/" exact render={() => <Landing {...this.props} />} />
+            <Route
+              path="/login/artist"
+              render={() =>
+                userId === "" ? (
+                  <LoginArtist {...this.props} />
+                ) : (
+                  <Redirect to="/" />
+                )
+              }
+            />
+            <Route
+              path="/login"
+              render={() =>
+                userId === "" ? <Login {...this.props} /> : <Redirect to="/" />
+              }
+            />
+            <Route
+              path="/register/artist"
+              render={() =>
+                userId === "" ? (
+                  <RegisterArtist {...this.props} />
+                ) : (
+                  <Redirect to="/" />
+                )
+              }
+            />
+            <Route
+              path="/register"
+              render={() =>
+                userId === "" ? (
+                  <Register {...this.props} />
+                ) : (
+                  <Redirect to="/" />
+                )
+              }
+            />
+            <Route
+              path="/purchases"
+              render={() =>
+                userId === "" ? (
+                  <Redirect to="/" />
+                ) : (
+                  <Purchase {...this.props} />
+                )
+              }
+            />
+            <Route path="/artist">
               <Route
-                path="/"
-                render={() => <Landing {...this.props} />}
-                exact
+                path="/artist/:artistId"
+                render={() => <Artist {...this.props} />}
               />
+            </Route>
+            <Route
+              path="/dashboard"
+              render={() =>
+                userId === "" && type !== "artist" ? (
+                  <Redirect to="/" />
+                ) : (
+                  <Dashboard {...this.props} />
+                )
+              }
+            />
+            <Route path="/music">
               <Route
-                path="/login/artist"
-                render={() =>
-                  userId === "" ? (
-                    <LoginArtist {...this.props} />
-                  ) : (
-                    <Redirect to="/" />
-                  )
-                }
-                exact
+                path="/music/:musicId"
+                render={() => <Music {...this.props} />}
               />
-              <Route
-                path="/login"
-                render={() =>
-                  userId === "" ? (
-                    <Login {...this.props} />
-                  ) : (
-                    <Redirect to="/" />
-                  )
-                }
-                exact
-              />
-              <Route
-                path="/register/artist"
-                render={() =>
-                  userId === "" ? (
-                    <RegisterArtist {...this.props} />
-                  ) : (
-                    <Redirect to="/" />
-                  )
-                }
-                exact
-              />
-              <Route
-                path="/register"
-                render={() =>
-                  userId === "" ? (
-                    <Register {...this.props} />
-                  ) : (
-                    <Redirect to="/" />
-                  )
-                }
-                exact
-              />
-              <Route
-                path="/purchases"
-                render={() =>
-                  userId === "" ? (
-                    <Redirect to="/" />
-                  ) : (
-                    <Purchase {...this.props} />
-                  )
-                }
-                exact
-              />
-              <Route path="/artist">
-                <Route
-                  path="/artist/:artistId"
-                  render={() => <Artist {...this.props} />}
-                />
-              </Route>
-              <Route
-                path="/dashboard"
-                render={() =>
-                  userId === "" && type !== "artist" ? (
-                    <Redirect to="/" />
-                  ) : (
-                    <Dashboard {...this.props} />
-                  )
-                }
-              />
-              <Route path="/music">
-                <Route
-                  path="/music/:musicId"
-                  render={() => <Music {...this.props} />}
-                />
-              </Route>
-              <Route path="/browse" render={() => <Browse {...this.props} />} />
-              <Route path="*" component={PageNotFound} />
-            </Switch>
-          </Suspense>
-        )}
+            </Route>
+            <Route path="/browse" render={() => <Browse {...this.props} />} />
+            <Route path="*" component={PageNotFound} />
+          </Switch>
+        </Suspense>
+        {/* )} */}
         <Footer />
       </>
     );

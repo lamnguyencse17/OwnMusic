@@ -38,7 +38,6 @@ export const createTransaction = async ({
 export const transactionStatus = async () => {
   const txList = getTransactionList();
   if (lodash.keys(txList).length === 0) {
-    console.log("NO NEW TRANSACTION");
     return;
   }
   const statuses = await coinpaymentClient.getTxMulti(lodash.values(txList));
