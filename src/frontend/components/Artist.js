@@ -40,10 +40,10 @@ export default function Artist(props) {
         <div className="container py-10 mx-auto">
           {error === "" ? <></> : <h3>{error}</h3>}
           <div className="grid grid-cols-5">
-            <div className="col-span-1">
+            <div className="col-span-2">
               <Cover coverURL={artist.coverURL} />
             </div>
-            <div className="col-span-4 px-5">
+            <div className="col-span-3 px-5">
               <ArtistInfo {...artistInfo} />
             </div>
           </div>
@@ -51,6 +51,7 @@ export default function Artist(props) {
           <div>
             <MusicList musics={artist.musics} />
           </div>
+          <hr />
           <Suggestions />
         </div>
       )}

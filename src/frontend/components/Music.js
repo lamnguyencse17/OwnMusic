@@ -33,7 +33,7 @@ function Music(props) {
         <div className="container mx-auto">
           {error === "" ? <></> : <h3>{error}</h3>}
           <div className="py-10">
-            <Cover />
+            <Cover coverURL={music.coverURL} />
             <div className="grid py-5 md:grid-cols-4 sm:grid-cols-1">
               <div className="px-3 md:col-span-2">
                 <DemoPlayer demoURL={music.demoURL} />

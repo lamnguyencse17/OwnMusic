@@ -1,11 +1,13 @@
 import React from "react";
+import CallToAction from "./CallToAction";
 
 function ArtistInfo(props) {
-  const { name, description } = props;
+  const { name, description, _id } = props;
   return (
     <div>
-      <h1>{name}</h1>
-      <h2>{description}</h2>
+      <div className="text-3xl font-semibold text-white">{name}</div>
+      <div className="text-xl font-normal text-white">{description}</div>
+      <CallToAction artist={_id} />
     </div>
   );
 }
