@@ -19,6 +19,7 @@ export default function Nav() {
       ) : (
         <>
           {type !== "artist" ? <></> : <Link to="/dashboard">Dashboard</Link>}
+          {type !== "user" ? <></> : <Link to="/purchases">Purchases</Link>}
           <Link to="/logout">Logout</Link>
         </>
       )}

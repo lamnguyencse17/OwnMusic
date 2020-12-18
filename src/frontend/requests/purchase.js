@@ -14,3 +14,18 @@ export const createPurchaseRequest = async ({ artist, musics, amount }) => {
     };
   }
 };
+
+export const getUserPurchaseRequest = async ({ offset, limit }) => {
+  const purchaseUrl = `${process.env.BACKEND_SERVER}/api/purchase?offset=${offset}&limit=${limit}`;
+  try {
+    const res = await axios.get(purchaseUrl);
+    return { status: true, purchase: res.data };
+  } catch (err) {
+    console.error(err);
+    return {
+      status: false,
+      errCode: err.response.status,
+      message: err.response.data.message,
+    };
+  }
+};

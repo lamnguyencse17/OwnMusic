@@ -1,38 +1,47 @@
 import React, { useEffect, useState } from "react";
-import { getMusicByPageRequest } from "../../requests/music";
-import MusicCard from "./MusicCard";
+import { getUserPurchaseRequest } from "../requests/purchase";
+import PurchaseItem from "./Purchase/PurchaseItem";
 
-export default function Music() {
+export default function Purchase() {
   const initialControl = { offset: 0, limit: 5 };
   const [controls, setControl] = useState(initialControl);
-  const [musicContent, setContent] = useState([]);
   const [error, setError] = useState("");
+  let [purchases, setPurchases] = useState([]);
   useEffect(() => {
     (async () => {
-      const { status, music, message } = await getMusicByPageRequest(controls);
+      const { status, purchase, message } = await getUserPurchaseRequest(
+        controls
+      );
       if (!status) {
         setError(message);
         return;
       }
-      if (music.length === 0) {
+      if (purchase.length === 0) {
         setError("No More Results");
         setControl({ ...initialControl });
         return;
       }
-      setContent(music);
+      setPurchases(purchase);
     })();
-  }, [controls]);
+  });
   return (
     <div className="container mx-auto">
       {error === "" ? <></> : <h3>{error}</h3>}
-      {musicContent.length === 0 ? (
+      {purchases.length === 0 ? (
         <></>
       ) : (
         <>
           <ul className="px-0 py-10">
-            {musicContent.map((music) => (
-              <MusicCard {...music} key={music._id} />
-            ))}
+            {purchases.map((purchase) => {
+              let musicData = purchase.musics[0];
+              return (
+                <PurchaseItem
+                  key={purchase._id}
+                  {...musicData}
+                  artist={purchase.artist}
+                />
+              );
+            })}
           </ul>
           <button
             className="bg-gray-300"

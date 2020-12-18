@@ -18,6 +18,7 @@ import Browse from "./Browse";
 import LoginArtist from "./LoginArtist";
 import RegisterArtist from "./RegisterArtist";
 import Dashboard from "./Dashboard";
+import Purchase from "./Purchase";
 
 class App extends Component {
   constructor(props) {
@@ -30,6 +31,7 @@ class App extends Component {
         history.push("/");
       }
     });
+    this.state = { isValidated: false };
   }
   async componentDidMount() {
     const type = await localStorage.getItem("type");
@@ -37,6 +39,7 @@ class App extends Component {
       return;
     }
     await this.props.setUser({ token: null, type });
+    this.setState({ isValidated: true });
   }
 
   render() {
@@ -44,75 +47,98 @@ class App extends Component {
     return (
       <>
         <Navbar />
-        <Suspense fallback={<div className="loader"></div>}>
-          <Switch>
-            <Route path="/" render={() => <Landing {...this.props} />} exact />
-            <Route
-              path="/login/artist"
-              render={() =>
-                userId === "" ? (
-                  <LoginArtist {...this.props} />
-                ) : (
-                  <Redirect to="/" />
-                )
-              }
-              exact
-            />
-            <Route
-              path="/login"
-              render={() =>
-                userId === "" ? <Login {...this.props} /> : <Redirect to="/" />
-              }
-              exact
-            />
-            <Route
-              path="/register/artist"
-              render={() =>
-                userId === "" ? (
-                  <RegisterArtist {...this.props} />
-                ) : (
-                  <Redirect to="/" />
-                )
-              }
-              exact
-            />
-            <Route
-              path="/register"
-              render={() =>
-                userId === "" ? (
-                  <Register {...this.props} />
-                ) : (
-                  <Redirect to="/" />
-                )
-              }
-              exact
-            />
-            <Route path="/artist">
+        {!this.state.isValidated ? (
+          <></>
+        ) : (
+          <Suspense fallback={<div className="loader"></div>}>
+            <Switch>
               <Route
-                path="/artist/:artistId"
-                render={() => <Artist {...this.props} />}
+                path="/"
+                render={() => <Landing {...this.props} />}
+                exact
               />
-            </Route>
-            <Route
-              path="/dashboard"
-              render={() =>
-                userId === "" && type !== "artist" ? (
-                  <Redirect to="/" />
-                ) : (
-                  <Dashboard {...this.props} />
-                )
-              }
-            />
-            <Route path="/music">
               <Route
-                path="/music/:musicId"
-                render={() => <Music {...this.props} />}
+                path="/login/artist"
+                render={() =>
+                  userId === "" ? (
+                    <LoginArtist {...this.props} />
+                  ) : (
+                    <Redirect to="/" />
+                  )
+                }
+                exact
               />
-            </Route>
-            <Route path="/browse" render={() => <Browse {...this.props} />} />
-            <Route path="*" component={PageNotFound} />
-          </Switch>
-        </Suspense>
+              <Route
+                path="/login"
+                render={() =>
+                  userId === "" ? (
+                    <Login {...this.props} />
+                  ) : (
+                    <Redirect to="/" />
+                  )
+                }
+                exact
+              />
+              <Route
+                path="/register/artist"
+                render={() =>
+                  userId === "" ? (
+                    <RegisterArtist {...this.props} />
+                  ) : (
+                    <Redirect to="/" />
+                  )
+                }
+                exact
+              />
+              <Route
+                path="/register"
+                render={() =>
+                  userId === "" ? (
+                    <Register {...this.props} />
+                  ) : (
+                    <Redirect to="/" />
+                  )
+                }
+                exact
+              />
+              <Route
+                path="/purchases"
+                render={() =>
+                  userId === "" ? (
+                    <Redirect to="/" />
+                  ) : (
+                    <Purchase {...this.props} />
+                  )
+                }
+                exact
+              />
+              <Route path="/artist">
+                <Route
+                  path="/artist/:artistId"
+                  render={() => <Artist {...this.props} />}
+                />
+              </Route>
+              <Route
+                path="/dashboard"
+                render={() =>
+                  userId === "" && type !== "artist" ? (
+                    <Redirect to="/" />
+                  ) : (
+                    <Dashboard {...this.props} />
+                  )
+                }
+              />
+              <Route path="/music">
+                <Route
+                  path="/music/:musicId"
+                  render={() => <Music {...this.props} />}
+                />
+              </Route>
+              <Route path="/browse" render={() => <Browse {...this.props} />} />
+              <Route path="*" component={PageNotFound} />
+            </Switch>
+          </Suspense>
+        )}
         <Footer />
       </>
     );

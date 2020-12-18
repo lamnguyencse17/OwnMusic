@@ -37,7 +37,6 @@ export const getUserRequest = async (type) => {
   } else {
     userUrl = `${process.env.BACKEND_SERVER}/api/user/artist`;
   }
-  console.log(userUrl);
   try {
     const res = await axios.get(userUrl);
     return { status: true, userData: res.data };
