@@ -7,7 +7,7 @@ export default function Logo() {
       <Link to="/">
         <img
           src="https://github.com/lamnguyencse17/OwnMusic/blob/main/public/logo.png?raw=true"
-          className="lg:h-24"
+          className="absolute lg:h-16"
         />
       </Link>
     </div>
