@@ -1,5 +1,5 @@
 import { getUserRequest } from "../requests/user";
-import { SET_USER } from "./types";
+import { SET_USER, CLEAR_USER } from "./types";
 
 export const setUser = ({ token, type }) => async (dispatch) => {
   const getUserResult = await getUserRequest(type);
@@ -13,4 +13,9 @@ export const setUser = ({ token, type }) => async (dispatch) => {
     dispatch({ type: SET_USER, payload: { ...getUserResult.userData, type } });
     return getUserResult.userData.token || true;
   }
+};
+
+export const clearUser = () => async (dispatch) => {
+  localStorage.setItem("isLogin", "false");
+  dispatch({ type: CLEAR_USER });
 };

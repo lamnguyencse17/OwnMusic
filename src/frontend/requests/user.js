@@ -83,3 +83,14 @@ export const createArtistRegisterRequest = async ({
     };
   }
 };
+
+export const logOutRequest = () => {
+  return axios
+    .get(`${process.env.BACKEND_SERVER}/api/auth/logout`)
+    .then(() => {
+      return true;
+    })
+    .catch(() => {
+      return false;
+    });
+};

@@ -14,6 +14,7 @@ import Register from "./Register";
 import { setUser } from "../actions/user";
 import Music from "./Music";
 import Browse from "./Browse";
+import Logout from "./Logout";
 // import LoginArtist from "./LoginArtist";
 // import RegisterArtist from "./RegisterArtist";
 // import Dashboard from "./Dashboard";
@@ -73,6 +74,12 @@ class App extends Component {
               path="/login"
               render={() =>
                 userId === "" ? <Login {...this.props} /> : <Redirect to="/" />
+              }
+            />
+            <Route
+              path="/logout"
+              render={() =>
+                userId !== "" ? <Logout {...this.props} /> : <Redirect to="/" />
               }
             />
             <Route

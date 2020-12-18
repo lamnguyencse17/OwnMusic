@@ -29,5 +29,6 @@ router.use("/artist", require("./routes/artist"));
 router.use("/purchase", authenticator, require("./routes/purchase"));
 router.use("/auth/register", require("./routes/auth/register"));
 router.use("/auth/login", require("./routes/auth/login"));
+router.use("/auth/logout", require("./routes/auth/logout"));
 
 module.exports = router;
