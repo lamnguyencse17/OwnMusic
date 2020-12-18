@@ -10,12 +10,12 @@ function MusicInfo(props) {
       <h2>{description}</h2>
       <hr></hr>
       <h1>Artist</h1>
+      <img src={artist.coverURL} />
       <h2>
         <Link to={{ pathname: `/artist/${artist._id}`, state: { ...artist } }}>
           {artist.name}
         </Link>
       </h2>
-      {artist.description}
       <h2>{artist.description}</h2>
     </div>
   );

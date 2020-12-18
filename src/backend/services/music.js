@@ -32,7 +32,7 @@ export const getSingleMusic = async (musicId) => {
     const result = await musicModel
       .findOne({ _id: mongoose.Types.ObjectId(musicId) })
       .select("-downloadURL")
-      .populate("artist", "name _id")
+      .populate("artist", "name _id coverURL description")
       .lean();
     if (!result) {
       return { status: false, message: "No Music With Such ID Found" };
