@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { createPurchaseRequest } from "../../requests/purchase";
 
 function CallToAction(props) {
   const { _id, price, artist } = props;
   const handlePurchase = async () => {
-    await createPurchaseRequest({ musics: [_id], artist, amount: price });
+    const { status, message, purchase } = await createPurchaseRequest({
+      musics: [_id],
+      artist,
+      amount: price,
+    });
+    if (!status) {
+      alert(message);
+      return;
+    }
+    window.open(purchase.checkout_url);
   };
   return (
     <div>

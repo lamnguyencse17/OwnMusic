@@ -1,4 +1,6 @@
 import purchaseModel from "../models/purchase";
+import artistModel from "../models/artist";
+import musicModel from "../models/musics";
 import mongoose from "mongoose";
 
 export const createPurchase = async ({ user, artist, musics }) => {
@@ -23,7 +25,7 @@ export const createPurchase = async ({ user, artist, musics }) => {
 export const getPurchaseOfUser = async (userId, { limit, offset }) => {
   try {
     const purchase = await purchaseModel
-      .find({ user: mongoose.Types.ObjectId })
+      .find({ user: mongoose.Types.ObjectId(userId) })
       .skip(offset)
       .limit(limit)
       .populate("musics", "-artist")

@@ -6,11 +6,13 @@ import DemoPlayer from "./Music/Demo";
 import CallToAction from "./Music/CallToAction";
 import { useParams } from "react-router-dom";
 import { getMusicRequest } from "../requests/music";
+import { useSelector } from "react-redux";
 
 function Music(props) {
   const { musicId } = useParams();
   let [music, setMusic] = useState(props.location.state);
   let [error, setError] = useState("");
+  const { _id, type } = useSelector((state) => state.user);
   useEffect(() => {
     if (music === undefined || music._id !== musicId) {
       (async () => {
@@ -42,12 +44,16 @@ function Music(props) {
                   name={music.name}
                   description={music.description}
                 />
-                <CallToAction
-                  price={music.price}
-                  _id={music._id}
-                  artist={music.artist._id}
-                  amount={music.amount}
-                />
+                {_id === "" || type === "artist" ? (
+                  <></>
+                ) : (
+                  <CallToAction
+                    price={music.price}
+                    _id={music._id}
+                    artist={music.artist._id}
+                    amount={music.amount}
+                  />
+                )}
               </div>
             </div>
             <Suggestions />

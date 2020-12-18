@@ -24,11 +24,14 @@ export const getUserPurchaseController = async (req, res) => {
   if (!status) {
     return res.status(HANDLED_ERROR_RESPONSE).json({ message });
   }
-  return res.status(OK_RESPONSE).json({ purchase });
+  return res.status(OK_RESPONSE).json(purchase);
 };
 
 export const handlePurchaseController = async (req, res) => {
-  const { _id, email } = req;
+  // const { _id, email } = req;
+  const _id = req._id;
+  const email = req.email;
+  console.log(_id, email);
   const { artist, musics, amount } = req.body;
   const validateResult = validateNewPurchase({ artist, musics, amount });
   if (!validateResult.status) {
@@ -75,7 +78,7 @@ export const handlePurchaseController = async (req, res) => {
   }
   return res
     .status(OK_RESPONSE)
-    .json({ transaction: createTransactionResult.transaction });
+    .json({ ...createTransactionResult.transaction });
 };
 
 export const handleSuccessPurchaseController = async (req, res) => {
