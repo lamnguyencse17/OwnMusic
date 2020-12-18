@@ -4,26 +4,20 @@ const PageNotFound = React.lazy(() => import("./common/PageNotFound"));
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-// import { setUser, clearUser } from "../actions/user";
 import axios from "axios";
 import Landing from "./Landing";
 import Login from "./Login";
 import Navbar from "./common/Navbar";
 import Footer from "./common/Footer";
 import Register from "./Register";
-// import Artist from "./Artist";
+import Artist from "./Artist";
 import { setUser } from "../actions/user";
 import Music from "./Music";
 import Browse from "./Browse";
-// import LoginArtist from "./LoginArtist";
-// import RegisterArtist from "./RegisterArtist";
-// import Dashboard from "./Dashboard";
-// import Purchase from "./Purchase";
-const Dashboard = React.lazy(() => import("./Dashboard"));
-const Purchase = React.lazy(() => import("./Purchase"));
-const RegisterArtist = React.lazy(() => import("./RegisterArtist"));
-const LoginArtist = React.lazy(() => import("./LoginArtist"));
-const Artist = React.lazy(() => import("./Artist"));
+import LoginArtist from "./LoginArtist";
+import RegisterArtist from "./RegisterArtist";
+import Dashboard from "./Dashboard";
+import Purchase from "./Purchase";
 
 class App extends Component {
   constructor(props) {
