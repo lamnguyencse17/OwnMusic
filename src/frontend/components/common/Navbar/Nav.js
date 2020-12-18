@@ -5,7 +5,9 @@ import { Link } from "react-router-dom";
 export default function Nav() {
   const { _id, type } = useSelector((state) => state.user);
   return (
-    <div className="space-x-3">
+    <div className="space-x-3 text-xl text-white">
+      <Link to="/browse/music">Music</Link>
+      <Link to="/browse/artists">Artists</Link>
       {_id === "" ? (
         <>
           {" "}

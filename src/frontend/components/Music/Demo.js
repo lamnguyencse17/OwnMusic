@@ -3,9 +3,12 @@ import ReactPlayer from "react-player/lazy";
 
 function DemoPlayer(props) {
   return (
-    <div>
-      <ReactPlayer url={props.demoURL} controls={true} />
-    </div>
+    <ReactPlayer
+      url={props.demoURL}
+      controls={true}
+      width="100%"
+      height="100%"
+    />
   );
 }
 

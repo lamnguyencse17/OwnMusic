@@ -16,9 +16,13 @@ function CallToAction(props) {
     window.open(purchase.checkout_url);
   };
   return (
-    <div>
-      <h1>Price: {price}</h1>
-      <button className="w-20 h-10 bg-white" onClick={handlePurchase}>
+    <div className="px-1">
+      <div className="text-xl font-normal text-white">Price: {price}</div>
+      <button
+        className="h-10 px-5 text-xl font-normal text-white rounded-md w-30"
+        style={{ backgroundColor: "rgb(184, 151, 119)" }}
+        onClick={handlePurchase}
+      >
         Buy Now!
       </button>
     </div>

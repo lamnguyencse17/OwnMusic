@@ -2,21 +2,22 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function MusicInfo(props) {
-  console.log(props);
   const { name, description, artist } = props;
   return (
-    <div>
-      <h1>{name}</h1>
-      <h2>{description}</h2>
+    <div className="flex-row items-center content-center px-1">
+      <div className="text-3xl font-semibold text-white">{name}</div>
+      <div className="text-xl font-normal text-white">{description}</div>
       <hr></hr>
-      <h1>Artist</h1>
-      <img src={artist.coverURL} />
-      <h2>
-        <Link to={{ pathname: `/artist/${artist._id}`, state: { ...artist } }}>
-          {artist.name}
-        </Link>
-      </h2>
-      <h2>{artist.description}</h2>
+      <div className="py-2">
+        <img src={artist.coverURL} className="w-full mx-auto" />
+      </div>
+
+      <Link to={{ pathname: `/artist/${artist._id}`, state: { ...artist } }}>
+        <div className="text-3xl font-semibold text-white">
+          By {artist.name}
+        </div>
+      </Link>
+      <div className="text-xl font-normal text-white">{artist.description}</div>
     </div>
   );
 }

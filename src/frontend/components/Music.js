@@ -34,11 +34,11 @@ function Music(props) {
           {error === "" ? <></> : <h3>{error}</h3>}
           <div className="py-10">
             <Cover />
-            <div className="grid grid-cols-4 py-5">
-              <div className="col-span-3">
+            <div className="grid py-5 md:grid-cols-4 sm:grid-cols-1">
+              <div className="px-3 md:col-span-2">
                 <DemoPlayer demoURL={music.demoURL} />
               </div>
-              <div className="col-span-1">
+              <div className="md:col-span-2">
                 <MusicInfo
                   artist={music.artist}
                   name={music.name}

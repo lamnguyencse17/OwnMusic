@@ -18,7 +18,7 @@ export default function Suggestions() {
     <div>
       <div className="py-5 text-2xl text-white">Your Daily Suggestions</div>
       {error === "" ? <></> : <h3>error</h3>}
-      <div className="grid grid-cols-5">
+      <div className="grid md:grid-cols-5 sm:grid-cols-1 sm:space-x-2 sm:mx-auto">
         {suggestion.map((music) => (
           <SuggestionCard key={music._id} {...music} />
         ))}
