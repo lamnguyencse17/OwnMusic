@@ -3,7 +3,7 @@ import artistModel from "../models/artist";
 import musicModel from "../models/musics";
 import mongoose from "mongoose";
 
-export const createPurchase = async ({ user, artist, musics }) => {
+export const createPurchase = async ({ user, artist, musics, price }) => {
   try {
     const purchase = await purchaseModel.create({
       user: mongoose.Types.ObjectId(user),
@@ -14,6 +14,7 @@ export const createPurchase = async ({ user, artist, musics }) => {
           : musics.map((music) => mongoose.Types.ObjectId(music)),
       isCompleted: false,
       isPending: true,
+      price,
     });
     return { status: true, purchase };
   } catch (err) {

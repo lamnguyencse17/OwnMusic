@@ -10,21 +10,16 @@ import Login from "./Login";
 import Navbar from "./common/Navbar";
 import Footer from "./common/Footer";
 import Register from "./Register";
-// import Artist from "./Artist";
 import { setUser } from "../actions/user";
 import Music from "./Music";
-import Browse from "./Browse";
-import Logout from "./Logout";
-// import LoginArtist from "./LoginArtist";
-// import RegisterArtist from "./RegisterArtist";
-// import Dashboard from "./Dashboard";
-// import Purchase from "./Purchase";
 
 const Dashboard = React.lazy(() => import("./Dashboard"));
 const Purchase = React.lazy(() => import("./Purchase"));
 const RegisterArtist = React.lazy(() => import("./RegisterArtist"));
 const LoginArtist = React.lazy(() => import("./LoginArtist"));
 const Artist = React.lazy(() => import("./Artist"));
+const Browse = React.lazy(() => import("./Browse"));
+const Logout = React.lazy(() => import("./Logout"));
 
 class App extends Component {
   constructor(props) {
@@ -50,9 +45,8 @@ class App extends Component {
 
   render() {
     const { userId, type } = this.props;
-    console.log(this.props);
     return (
-      <>
+      <div style={{ backgroundColor: "#494949" }}>
         <Navbar />
         {/* {!this.state.isValidated ? (
           <></>
@@ -139,7 +133,7 @@ class App extends Component {
           </Switch>
         </Suspense>
         <Footer />
-      </>
+      </div>
     );
   }
 }

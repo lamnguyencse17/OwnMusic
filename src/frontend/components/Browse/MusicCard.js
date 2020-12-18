@@ -11,7 +11,7 @@ export default function MusicCard(props) {
         <img src={props.coverURL} />
       </div>
       <div
-        className="mx-2 border md:col-span-10"
+        className="border md:p-2 sm:mx-2 md:col-span-10"
         style={{ borderColor: "#494949" }}
       >
         <Link to={`/music/${props._id}`}>

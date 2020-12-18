@@ -54,6 +54,7 @@ export const handlePurchaseController = async (req, res) => {
     user: _id,
     artist,
     musics,
+    price: amount,
   });
   if (!createPurchaseStatus.status) {
     return res
