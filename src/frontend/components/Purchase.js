@@ -23,7 +23,7 @@ export default function Purchase() {
       }
       setPurchases(purchase);
     })();
-  });
+  }, [controls]);
   return (
     <div className="container mx-auto">
       {error === "" ? <></> : <h3>{error}</h3>}

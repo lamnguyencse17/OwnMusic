@@ -24,7 +24,7 @@ export const createPurchase = async ({ user, artist, musics }) => {
 
 export const getPurchaseOfUser = async (userId, { limit, offset }) => {
   try {
-    const purchase = await purchaseModel
+    let purchase = await purchaseModel
       .find({ user: mongoose.Types.ObjectId(userId) })
       .skip(offset)
       .limit(limit)
@@ -34,6 +34,16 @@ export const getPurchaseOfUser = async (userId, { limit, offset }) => {
     if (!purchase) {
       return { status: false, message: "No purchase found" };
     }
+    purchase = purchase.map((record) => {
+      if (!record.isCompleted) {
+        let musics = record.musics.map((music) => {
+          let { downloadURL, ...newMusic } = music;
+          return newMusic;
+        });
+        record.musics = musics;
+      }
+      return record;
+    });
     return { status: true, purchase };
   } catch (err) {
     console.error(err);

@@ -31,7 +31,6 @@ export const handlePurchaseController = async (req, res) => {
   // const { _id, email } = req;
   const _id = req._id;
   const email = req.email;
-  console.log(_id, email);
   const { artist, musics, amount } = req.body;
   const validateResult = validateNewPurchase({ artist, musics, amount });
   if (!validateResult.status) {
