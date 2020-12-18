@@ -3,7 +3,7 @@ import React from "react";
 export default function Cover(props) {
   return (
     <div className="w-full">
-      <img src={props.coverURL} />
+      <img src={props.coverURL} className="mx-auto" />
     </div>
   );
 }

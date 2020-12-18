@@ -8,7 +8,7 @@ export default function MusicCard(props) {
       style={{ backgroundColor: "#b89777" }}
     >
       <div className="px-2 md:col-span-2">
-        <img src={props.coverURL} />
+        <img src={props.coverURL} className="mx-auto" />
       </div>
       <div
         className="border md:p-2 sm:mx-2 md:col-span-10"

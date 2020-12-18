@@ -10,8 +10,8 @@ export default function PurchaseItem(props) {
     >
       {props._id !== undefined ? (
         <>
-          <div className="px-2 md:col-span-2">
-            <img src={props.coverURL} />
+          <div className="w-full md:px-2 md:col-span-2">
+            <img src={props.coverURL} className="mx-auto sm:w-full" />
           </div>
           <div
             className="border md:flex md:items-center md:content-center md:p-2 sm:mx-2 md:col-span-10"
@@ -58,12 +58,13 @@ export default function PurchaseItem(props) {
                 <></>
               )}
             </div>
-            <div className="w-1/2 h-full px-5 py-2">
+            <div className="px-5 py-2 md:w-1/2 md:h-full">
               <DemoPlayer demoURL={props.demoURL} />
             </div>
           </div>
         </>
       ) : (
+        // </div>
         <div
           className="border md:p-2 sm:mx-2 md:col-span-12"
           style={{ borderColor: "#494949" }}
