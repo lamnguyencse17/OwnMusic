@@ -2,7 +2,7 @@ import React from "react";
 import { Formik } from "formik";
 import { createRegisterRequest } from "../requests/user";
 import { validateCreateUser } from "../validators/userValidator";
-
+import "../assets/Registerstyle.css"
 const validateRegisterForm = (values) => {
   const { email, password, name, password2 } = values;
   const { status, message } = validateCreateUser({
@@ -43,16 +43,12 @@ const submitRegisterForm = async (values, setSubmitting) => {
 export default function Register() {
   return (
     <div className="flex items-center justify-center min-h-screen px-4 py-12 bg-gray-50 sm:px-6 lg:px-8">
-      <div className="w-full max-w-md space-y-8">
+      <div className="signup">
         <div>
-          <img
-            className="w-auto h-12 mx-auto"
-            src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-            alt="Workflow"
-          />
-          <h2 className="mt-6 text-3xl font-extrabold text-center text-gray-900">
-            Register your account
+          <h2 className="mt-6 text-3xl font-extrabold text-center text-indigo-700">
+            Register
           </h2>
+          <h3 className=" text-center text-gray-900">and chill the music by your own way</h3>
         </div>
         <Formik
           initialValues={{ email: "", password: "", name: "", password2: "" }}
@@ -71,8 +67,8 @@ export default function Register() {
           }) => (
             <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
               <input type="hidden" name="remember" value="true" />
-              <div className="-space-y-px rounded-md shadow-sm">
-                <div>
+              <div className=" rounded-md shadow-sm">
+                <div className= "signup__field">
                   <label htmlFor="name" className="sr-only">
                     Name
                   </label>
@@ -82,15 +78,15 @@ export default function Register() {
                     type="name"
                     autoComplete="name"
                     required
-                    className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                    placeholder="Name"
+                    className="signup__input"
                     disabled={isSubmitting}
                     onChange={handleChange}
                     value={values.name}
                   />
-                  {errors.name && touched.name && errors.name}
+                   <label class="signup__label" for="name">Username</label>
+                   <div class= "failmess" >  {errors.name && touched.name && errors.name}</div>
                 </div>
-                <div>
+                <div className= "signup__field">
                   <label htmlFor="email-address" className="sr-only">
                     Email address
                   </label>
@@ -100,15 +96,15 @@ export default function Register() {
                     type="email"
                     autoComplete="email"
                     required
-                    className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                    placeholder="Email address"
+                    className="signup__input"
                     disabled={isSubmitting}
                     onChange={handleChange}
                     value={values.email}
                   />
-                  {errors.email && touched.email && errors.email}
+                   <label class="signup__label" for="email">Email address</label>
+                   <div class= "failmess" > {errors.email && touched.email && errors.email}</div>
                 </div>
-                <div>
+                <div className= "signup__field">
                   <label htmlFor="password" className="sr-only">
                     Password
                   </label>
@@ -118,15 +114,17 @@ export default function Register() {
                     type="password"
                     autoComplete="current-password"
                     required
-                    className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                    placeholder="Password"
+                    className="signup__input"
                     disabled={isSubmitting}
                     onChange={handleChange}
                     value={values.password}
                   />
+                   <label class="signup__label" for="password">Password</label>
+                   <div class= "failmess" >
                   {errors.password && touched.password && errors.password}
+                  </div>
                 </div>
-                <div>
+                <div className= "signup__field">
                   <label htmlFor="password2" className="sr-only">
                     Password
                   </label>
@@ -135,13 +133,15 @@ export default function Register() {
                     name="password2"
                     type="password"
                     required
-                    className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                    placeholder="Retype Your Password"
+                    className="signup__input"
                     disabled={isSubmitting}
                     onChange={handleChange}
                     value={values.password2}
                   />
+                   <label class="signup__label" for="password2">Confirm your password</label>
+                 <div class= "failmess" >
                   {errors.password2 && touched.password2 && errors.password2}
+                  </div>
                 </div>
               </div>
               <div>
