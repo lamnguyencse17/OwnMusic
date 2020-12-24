@@ -2,7 +2,7 @@
 ARG VARIANT=14
 FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:${VARIANT}
 ENV SECRET_KEY=TU%8&sPS5Qz4$rLc#VsQfFvnz3W7nV
-ENV MONGODB_URI=mongodb://db:27017/ownmusic?readPreference=primary&appname=Server&ssl=false
+ENV MONGODB_URI=mongodb+srv://zodiac3011:zodiac3011@cluster0.5m9ay.gcp.mongodb.net/gamez?authSource=admin&replicaSet=Cluster0-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true
 ENV PORT=3000
 ENV BACKEND_SERVER=http://localhost:3000
 ENV FRONTEND_SERVER=http://localhost:8080

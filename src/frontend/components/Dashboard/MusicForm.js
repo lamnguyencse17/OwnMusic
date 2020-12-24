@@ -39,7 +39,7 @@ export default function MusicForm() {
     }
   };
   return (
-    <div>
+    <div className="w-full bg-white rounded-xl shadow-lg p-8 m-16 md:max-w-sm md:mx-auto">
       <Formik
         initialValues={{
           name: "",
@@ -62,9 +62,10 @@ export default function MusicForm() {
           handleSubmit,
           isSubmitting,
         }) => (
-          <form onSubmit={handleSubmit}>
-            <div>
+          <form className="mb-6" onSubmit={handleSubmit}>
+            <div className="flex flex-col mb-4">
               <input
+                className="border py-2 px-3 text-grey-darkest"
                 placeholder="Name"
                 id="name"
                 type="name"
@@ -75,8 +76,9 @@ export default function MusicForm() {
               />
               {errors.name && touched.name && errors.name}
             </div>
-            <div>
+            <div className="flex flex-col mb-4">
               <input
+                className="border py-2 px-3 text-grey-darkest"
                 placeholder="Description"
                 id="description"
                 type="name"
@@ -87,8 +89,9 @@ export default function MusicForm() {
               />
               {errors.description && touched.description && errors.description}
             </div>
-            <div>
+            <div className="flex flex-col mb-4">
               <input
+                className="border py-2 px-3 text-grey-darkest"
                 placeholder="Cover URL"
                 id="coverURL"
                 type="name"
@@ -99,8 +102,9 @@ export default function MusicForm() {
               />
               {errors.coverURL && touched.coverURL && errors.coverURL}
             </div>
-            <div>
+            <div className="flex flex-col mb-4">
               <input
+                className="border py-2 px-3 text-grey-darkest"
                 placeholder="Demo URL"
                 id="demoURL"
                 type="name"
@@ -111,8 +115,9 @@ export default function MusicForm() {
               />
               {errors.demoURL && touched.demoURL && errors.demoURL}
             </div>
-            <div>
+            <div className="flex flex-col mb-4">
               <input
+                className="border py-2 px-3 text-grey-darkest"
                 placeholder="Download URL"
                 id="downloadURL"
                 type="name"
@@ -123,8 +128,9 @@ export default function MusicForm() {
               />
               {errors.downloadURL && touched.downloadURL && errors.downloadURL}
             </div>
-            <div>
+            <div className="flex flex-col mb-4">
               <input
+                className="border py-2 px-3 text-grey-darkest"
                 id="price"
                 type="number"
                 name="price"
@@ -137,7 +143,7 @@ export default function MusicForm() {
             <div>
               <button
                 type="submit"
-                className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md group hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="block bg-yellow-600 hover:bg-yellow-400 text-white uppercase text-lg mx-auto p-4 rounded"
                 disabled={isSubmitting}
               >
                 Create Music
