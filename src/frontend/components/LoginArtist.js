@@ -82,8 +82,8 @@ export default function LoginArtist() {
                     onChange={handleChange}
                     value={values.email}
                   /> 
-                  <label class="signup__labeltheme" for="email">Email address</label>
-                  <div class= "failmesstheme" >{errors.email && touched.email && errors.email}</div>
+                  <label className="signup__labeltheme" htmlFor="email">Email address</label>
+                  <div className= "failmesstheme" >{errors.email && touched.email && errors.email}</div>
                 </div>
                 <div className= "signup__fieldtheme">
                   <label htmlFor="password" className="sr-only">
@@ -100,8 +100,8 @@ export default function LoginArtist() {
                     onChange={handleChange}
                     value={values.password}
                   />
-                  <label class="signup__labeltheme" for="password">Password</label>
-                  <div class= "failmesstheme" >{errors.password && touched.password && errors.password}</div>
+                  <label className="signup__labeltheme" htmlFor="password">Password</label>
+                  <div className= "failmesstheme" >{errors.password && touched.password && errors.password}</div>
                 </div>
               </div>
               <div>
@@ -125,7 +125,7 @@ export default function LoginArtist() {
                       />
                     </svg>
                   </span>
-                  Sign in
+                  Log in
                 </button>
               </div>
             </form>

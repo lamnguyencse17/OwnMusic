@@ -83,8 +83,8 @@ export default function Register() {
                     onChange={handleChange}
                     value={values.name}
                   />
-                   <label class="signup__labeltheme" for="name">Username</label>
-                   <div class= "failmesstheme" >  {errors.name && touched.name && errors.name}</div>
+                   <label className="signup__labeltheme" htmlFor="name">Name</label>
+                   <div className= "failmesstheme" >  {errors.name && touched.name && errors.name}</div>
                 </div>
                 <div className= "signup__fieldtheme">
                   <label htmlFor="email-address" className="sr-only">
@@ -101,8 +101,8 @@ export default function Register() {
                     onChange={handleChange}
                     value={values.email}
                   />
-                   <label class="signup__labeltheme" for="email">Email address</label>
-                   <div class= "failmesstheme" > {errors.email && touched.email && errors.email}</div>
+                   <label className="signup__labeltheme" htmlFor="email">Email address</label>
+                   <div className= "failmesstheme" > {errors.email && touched.email && errors.email}</div>
                 </div>
                 <div className= "signup__fieldtheme">
                   <label htmlFor="password" className="sr-only">
@@ -119,8 +119,8 @@ export default function Register() {
                     onChange={handleChange}
                     value={values.password}
                   />
-                   <label class="signup__labeltheme" for="password">Password</label>
-                   <div class= "failmesstheme" >
+                   <label className="signup__labeltheme" htmlFor="password">Password</label>
+                   <div className= "failmesstheme" >
                   {errors.password && touched.password && errors.password}
                   </div>
                 </div>
@@ -138,8 +138,8 @@ export default function Register() {
                     onChange={handleChange}
                     value={values.password2}
                   />
-                   <label class="signup__labeltheme" for="password2">Confirm your password</label>
-                 <div class= "failmesstheme" >
+                   <label className="signup__labeltheme" htmlFor="password2">Confirm your password</label>
+                 <div className= "failmesstheme" >
                   {errors.password2 && touched.password2 && errors.password2}
                   </div>
                 </div>
@@ -165,7 +165,7 @@ export default function Register() {
                       />
                     </svg>
                   </span>
-                  Sign in
+                  Register
                 </button>
               </div>
             </form>

@@ -101,8 +101,8 @@ export default function Login() {
                     onChange={handleChange}
                     value={values.password}
                   />
-                   <label class="signup__labeltheme" for="password">Password</label>
-                   <div class= "failmesstheme" > {errors.password && touched.password && errors.password}</div>
+                   <label className="signup__labeltheme" htmlFor="password">Password</label>
+                   <div className= "failmesstheme" > {errors.password && touched.password && errors.password}</div>
                 </div>
               </div>
               <div>
@@ -126,7 +126,7 @@ export default function Login() {
                       />
                     </svg>
                   </span>
-                  Sign in
+                  Log in
                 </button>
               </div>
             </form>
