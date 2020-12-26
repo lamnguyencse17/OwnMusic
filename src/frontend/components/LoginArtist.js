@@ -41,7 +41,7 @@ export default function LoginArtist() {
   const [error, setError] = useState("");
   return (
     <div className="flex items-center justify-center min-h-screen px-4 py-12 bg-gray-50 sm:px-6 lg:px-8">
-      <div className="signup">
+      <div className="signuptheme">
         <div>
         <h2 className="mt-6 text-3xl font-extrabold text-center text-indigo-700">
            Sign in as artist 
@@ -67,7 +67,7 @@ export default function LoginArtist() {
             <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
               <input type="hidden" name="remember" value="true" />
               <div className="-space-y-px rounded-md shadow-sm">
-                <div className= "signup__field">
+                <div className= "signup__fieldtheme">
                   <label htmlFor="email-address" className="sr-only">
                     Email address
                   </label>
@@ -77,15 +77,15 @@ export default function LoginArtist() {
                     type="email"
                     autoComplete="email"
                     required
-                    className="signup__input"
+                    className="signup__inputtheme"
                     disabled={isSubmitting}
                     onChange={handleChange}
                     value={values.email}
-                  />
-                  <label class="signup__label" for="email">Email address</label>
-                  <div class= "failmess" >{errors.email && touched.email && errors.email}</div>
+                  /> 
+                  <label class="signup__labeltheme" for="email">Email address</label>
+                  <div class= "failmesstheme" >{errors.email && touched.email && errors.email}</div>
                 </div>
-                <div className= "signup__field">
+                <div className= "signup__fieldtheme">
                   <label htmlFor="password" className="sr-only">
                     Password
                   </label>
@@ -95,13 +95,13 @@ export default function LoginArtist() {
                     type="password"
                     autoComplete="current-password"
                     required
-                    className="signup__input"
+                    className="signup__inputtheme"
                     disabled={isSubmitting}
                     onChange={handleChange}
                     value={values.password}
                   />
-                  <label class="signup__label" for="password">Password</label>
-                  <div class= "failmess" >{errors.password && touched.password && errors.password}</div>
+                  <label class="signup__labeltheme" for="password">Password</label>
+                  <div class= "failmesstheme" >{errors.password && touched.password && errors.password}</div>
                 </div>
               </div>
               <div>

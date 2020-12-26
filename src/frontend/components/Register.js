@@ -43,7 +43,7 @@ const submitRegisterForm = async (values, setSubmitting) => {
 export default function Register() {
   return (
     <div className="flex items-center justify-center min-h-screen px-4 py-12 bg-gray-50 sm:px-6 lg:px-8">
-      <div className="signup">
+      <div className="signuptheme ">
         <div>
           <h2 className="mt-6 text-3xl font-extrabold text-center text-indigo-700">
             Register
@@ -68,7 +68,7 @@ export default function Register() {
             <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
               <input type="hidden" name="remember" value="true" />
               <div className=" rounded-md shadow-sm">
-                <div className= "signup__field">
+                <div className= "signup__fieldtheme">
                   <label htmlFor="name" className="sr-only">
                     Name
                   </label>
@@ -78,15 +78,15 @@ export default function Register() {
                     type="name"
                     autoComplete="name"
                     required
-                    className="signup__input"
+                    className="signup__inputtheme"
                     disabled={isSubmitting}
                     onChange={handleChange}
                     value={values.name}
                   />
-                   <label class="signup__label" for="name">Username</label>
-                   <div class= "failmess" >  {errors.name && touched.name && errors.name}</div>
+                   <label class="signup__labeltheme" for="name">Username</label>
+                   <div class= "failmesstheme" >  {errors.name && touched.name && errors.name}</div>
                 </div>
-                <div className= "signup__field">
+                <div className= "signup__fieldtheme">
                   <label htmlFor="email-address" className="sr-only">
                     Email address
                   </label>
@@ -96,15 +96,15 @@ export default function Register() {
                     type="email"
                     autoComplete="email"
                     required
-                    className="signup__input"
+                    className="signup__inputtheme"
                     disabled={isSubmitting}
                     onChange={handleChange}
                     value={values.email}
                   />
-                   <label class="signup__label" for="email">Email address</label>
-                   <div class= "failmess" > {errors.email && touched.email && errors.email}</div>
+                   <label class="signup__labeltheme" for="email">Email address</label>
+                   <div class= "failmesstheme" > {errors.email && touched.email && errors.email}</div>
                 </div>
-                <div className= "signup__field">
+                <div className= "signup__fieldtheme">
                   <label htmlFor="password" className="sr-only">
                     Password
                   </label>
@@ -114,17 +114,17 @@ export default function Register() {
                     type="password"
                     autoComplete="current-password"
                     required
-                    className="signup__input"
+                    className="signup__inputtheme"
                     disabled={isSubmitting}
                     onChange={handleChange}
                     value={values.password}
                   />
-                   <label class="signup__label" for="password">Password</label>
-                   <div class= "failmess" >
+                   <label class="signup__labeltheme" for="password">Password</label>
+                   <div class= "failmesstheme" >
                   {errors.password && touched.password && errors.password}
                   </div>
                 </div>
-                <div className= "signup__field">
+                <div className= "signup__fieldtheme">
                   <label htmlFor="password2" className="sr-only">
                     Password
                   </label>
@@ -133,13 +133,13 @@ export default function Register() {
                     name="password2"
                     type="password"
                     required
-                    className="signup__input"
+                    className="signup__inputtheme"
                     disabled={isSubmitting}
                     onChange={handleChange}
                     value={values.password2}
                   />
-                   <label class="signup__label" for="password2">Confirm your password</label>
-                 <div class= "failmess" >
+                   <label class="signup__labeltheme" for="password2">Confirm your password</label>
+                 <div class= "failmesstheme" >
                   {errors.password2 && touched.password2 && errors.password2}
                   </div>
                 </div>
